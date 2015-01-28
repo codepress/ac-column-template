@@ -1,7 +1,7 @@
-# Admin Columns Column Template
+# Admin Columns - Column Template
 
 Welcome to the Admin Columns column template repository.
-Here you will find a starter-kit for creating a new Admin Columns column. This start-kit will work as a normal WP plugin.
+Here you will find a starter-kit for creating a new column for Admin Columns. This start-kit will work as a normal WP plugin.
 
 For more information about creating a new field type, please read the following article:
 https://www.admincolumns.com/documentation/how-to/register-column/
