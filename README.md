@@ -6,6 +6,8 @@ Here you will find a starter-kit for creating a new Admin Columns column. This s
 For more information about creating a new field type, please read the following article:
 https://www.admincolumns.com/documentation/how-to/register-column/
 
+( credits to Elliot for the readme structure )
+
 ### Structure
 
 * `/languages`: folder for .pot, .po and .mo files
