@@ -57,7 +57,25 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
     }
 
     /**
-     * (Optional) Load specific column settings.
+     * (Optional) Apply conditionals. You can remove this function is you do not use it!
+     *
+     * This determines whether the column should be available. If you want to disable this column
+     * for a particular posttype you can set this to false.
+     *
+     * @return bool True/False Default should be 'true'.
+     */
+    public function apply_conditional() {
+
+        // Example: if posttype does not support thumbnails then return false
+        // if ( ! post_type_supports( $this->get_post_type(), 'thumbnail' ) ) {
+        //    return false;
+        // }
+
+        return true;
+    }
+
+    /**
+     * (Optional) Load specific column settings. You can remove this function is you do not use it!
      *
      * Write your own input fields or use any of the standard settings.
      */
