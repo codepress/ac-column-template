@@ -17,7 +17,7 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
         // Default column label.
         $this->properties['label'] = __( 'COLUMN_LABEL', 'cac-COLUMN_NAME' );
 
-        // (optional) You can make it support sorting with the pro add-on enabled. Sorting will done by it's raw value.
+        // (optional) You can make it support sorting with the pro add-on enabled. Sorting will be done by it's raw value.
         $this->properties['is_sortable'] = true;
     }
 
@@ -48,7 +48,7 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
      */
     public function get_raw_value( $post_id ) {
 
-        // put all the column logic here to retrieve the value you
+        // put all the column logic here to retrieve the value you need
         // For example: $value = get_post_field( 'post_title', $post_id, 'raw' );
 
         $value = 'something';
@@ -66,7 +66,7 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
      */
     public function apply_conditional() {
 
-        // Example: if posttype does not support thumbnails then return false
+        // Example: if the posttype does not support thumbnails then return false
         // if ( ! post_type_supports( $this->get_post_type(), 'thumbnail' ) ) {
         //    return false;
         // }
@@ -83,7 +83,7 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
 
         // You can write your own input fields here, or use the examples below...
 
-        // Here are a few example on different settings that are available out-of-the-box.
+        // The following settings are available out-of-the-box:
 
         // Display an image preview size settings screen
         // $this->display_field_preview_size();
@@ -99,5 +99,22 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
 
         // Displays a dropdown menu with user display formats
         // $this->display_field_user_format();
+    }
+
+    /*
+     * (Optional) Scripts. You can remove this function is you do not use it!
+     *
+     * This action is called in the admin_enqueue_scripts action on the listings screen where your column values are displayed.
+     * Use this action to add CSS + JavaScript
+     *
+     * @since 3.3.4
+     */
+    public function scripts() {
+
+        //wp_register_script( 'cac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "js/column.js" );
+        //wp_enqueue_script( 'cac-COLUMN_NAME' );
+
+        //wp_register_style( 'cac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "css/column.css" );
+        //wp_enqueue_style( 'cac-COLUMN_NAME' );
     }
 }
