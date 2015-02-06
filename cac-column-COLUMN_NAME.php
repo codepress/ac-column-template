@@ -111,10 +111,10 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
      */
     public function scripts() {
 
-        //wp_register_script( 'cac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "js/column.js" );
-        //wp_enqueue_script( 'cac-COLUMN_NAME' );
+        // wp_register_script( 'cac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "js/column.js" );
+        // wp_enqueue_script( 'cac-COLUMN_NAME' );
 
-        //wp_register_style( 'cac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "css/column.css" );
-        //wp_enqueue_style( 'cac-COLUMN_NAME' );
+        // wp_register_style( 'cac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "css/column.css" );
+        // wp_enqueue_style( 'cac-COLUMN_NAME' );
     }
 }
