@@ -104,7 +104,7 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
     /*
      * (Optional) Scripts. You can remove this function is you do not use it!
      *
-     * This action is called in the admin_enqueue_scripts action on the listings screen where your column values are displayed.
+     * This action is called in the admin_head action on the listings screen where your column values are displayed.
      * Use this action to add CSS + JavaScript
      *
      * @since 3.3.4
