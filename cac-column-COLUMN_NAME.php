@@ -19,6 +19,9 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
 
         // (optional) You can make it support sorting with the pro add-on enabled. Sorting will be done by it's raw value.
         $this->properties['is_sortable'] = true;
+
+        // (optional) Enable/Disable inline editing support for this column.
+        $this->properties['is_editable'] = true;
     }
 
     /**
@@ -49,11 +52,44 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
     public function get_raw_value( $post_id ) {
 
         // put all the column logic here to retrieve the value you need
-        // For example: $value = get_post_field( 'post_title', $post_id, 'raw' );
+        // For example: $value = get_post_meta( $post_id, '_my_custom_field_example', true );
 
         $value = 'something';
 
         return $value;
+    }
+
+    /**
+     * (Optional) Inline editing settings. You can remove this function is you do not use it!
+     *
+     * @return array Editable settings
+     */
+    public function get_editable_settings() {
+
+        // available types: text, textarea, media, float, togglable, select, select2_dropdown and select2_tags
+        $settings = array(
+            'type' => 'text'
+        );
+
+        // (Optional) Only applies to type: togglable, select, select2_dropdown and select2_tags
+        // $settings['options'] = array( 'value_1', 'value_2', 'etc.' );
+
+        // (Optional) If a selector is provided, editable will be delegated to the specified targets
+        // $settings['js']['selector'] = 'a.my-class';
+
+        return $settings;
+    }
+
+    /**
+     * (Optional) Inline Edit store function. You can remove this function is you do not use it!
+     *
+     * @param int $id Object ID
+     * @param mixed $value Value to be saved
+     */
+    public function save( $id, $value ) {
+
+        // Store the value that has been entered with inline-edit
+        // For example: update_post_meta( $id, '_my_custom_field_example', $value );
     }
 
     /**
@@ -75,9 +111,9 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
     }
 
     /**
-     * (Optional) Load specific column settings. You can remove this function is you do not use it!
+     * (Optional) Create extra settings for you column. These are visible when editing a column. You can remove this function is you do not use it!
      *
-     * Write your own input fields or use any of the standard settings.
+     * Write your own settings or use any of the standard avaiable settings.
      */
     public function display_settings() {
 
@@ -102,7 +138,7 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
     }
 
     /*
-     * (Optional) Scripts. You can remove this function is you do not use it!
+     * (Optional) Enqueue CSS + JavaScript on the admin listings screen. You can remove this function is you do not use it!
      *
      * This action is called in the admin_head action on the listings screen where your column values are displayed.
      * Use this action to add CSS + JavaScript

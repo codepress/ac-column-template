@@ -10,6 +10,8 @@ https://www.admincolumns.com/documentation/how-to/register-column/
 
 ### Structure
 
+* `/css`: folder for .css files
+* `/js`:  folder for .js files
 * `/languages`: folder for .pot, .po and .mo files
 * `cac-COLUMN_NAME.php`: Main plugin file that registers the column
 * `cac-column-COLUMN_NAME.php`: Column class with all column logic
