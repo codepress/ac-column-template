@@ -23,7 +23,7 @@ add_filter( 'cac/columns/custom/type=post', 'cac_register_column_COLUMN_NAME' );
 function cac_register_column_COLUMN_NAME( $columns ) {
 
     // Class name and absolute filepath of the new column
-    $columns['CPAC_Column_COLUMN_NAME'] = plugin_dir_path( __FILE__ ) . '/cac-column-COLUMN_NAME.php';
+    $columns['CPAC_Column_COLUMN_NAME'] = plugin_dir_path( __FILE__ ) . 'cac-column-COLUMN_NAME.php';
 
     return $columns;
 }
