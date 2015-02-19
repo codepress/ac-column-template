@@ -17,10 +17,10 @@ load_plugin_textdomain( 'cac-COLUMN_NAME', false, dirname( plugin_basename( __FI
 
 // 2. Set the type of column.
 // Use the type: 'post', 'user', 'comment', 'media' or 'taxonomy'.
-add_filter( 'cac/columns/custom/type=post', 'register_column_COLUMN_NAME' );
+add_filter( 'cac/columns/custom/type=post', 'cac_register_column_COLUMN_NAME' );
 
 // 3. Register the column.
-function register_column_COLUMN_NAME( $columns ) {
+function cac_register_column_COLUMN_NAME( $columns ) {
 
     // Class name and absolute filepath of the new column
     $columns['CPAC_Column_COLUMN_NAME'] = plugin_dir_path( __FILE__ ) . '/cac-column-COLUMN_NAME.php';
