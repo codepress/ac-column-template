@@ -15,7 +15,7 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
         $this->properties['type'] = 'column-COLUMN_NAME';
 
         // Default column label.
-        $this->properties['label'] = __( 'COLUMN_LABEL', 'cac-COLUMN_NAME' );
+        $this->properties['label'] = __( 'COLUMN_LABEL', 'ac-COLUMN_NAME' );
 
         // (optional) You can make it support sorting with the pro add-on enabled. Sorting will be done by it's raw value.
         $this->properties['is_sortable'] = true;
@@ -153,10 +153,10 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
      */
     public function scripts() {
 
-        // wp_register_script( 'cac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "js/column.js" );
-        // wp_enqueue_script( 'cac-COLUMN_NAME' );
+        // wp_register_script( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "js/column.js" );
+        // wp_enqueue_script( 'ac-COLUMN_NAME' );
 
-        // wp_register_style( 'cac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "css/column.css" );
-        // wp_enqueue_style( 'cac-COLUMN_NAME' );
+        // wp_register_style( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "css/column.css" );
+        // wp_enqueue_style( 'ac-COLUMN_NAME' );
     }
 }
