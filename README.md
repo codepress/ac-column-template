@@ -13,8 +13,8 @@ https://www.admincolumns.com/documentation/how-to/register-column/
 * `/css`: folder for .css files
 * `/js`:  folder for .js files
 * `/languages`: folder for .pot, .po and .mo files
-* `cac-COLUMN_NAME.php`: Main plugin file that registers the column
-* `cac-column-COLUMN_NAME.php`: Column class with all column logic
+* `ac-COLUMN_NAME.php`: Main plugin file that registers the column
+* `ac-column-COLUMN_NAME.php`: Column class with all column logic
 * `readme.txt`: WordPress readme file to be used by the wordpress repository
 
 ### step 1.
@@ -32,11 +32,11 @@ This template uses `PLACEHOLDERS` such as `COLUMN_NAME` throughout the file name
 
 ### step 2.
 
-Edit the `cac-COLUMN_NAME.php` file (now renamed using your column name) and change the column type if necessary.
+Edit the `ac-COLUMN_NAME.php` file (now renamed using your column name) and change the column type if necessary.
 
 ### step 3.
 
-Edit the `cac-column-COLUMN_NAME.php` file (now renamed using your column name) and include your custom code in the appropriate functions.
+Edit the `ac-column-COLUMN_NAME.php` file (now renamed using your column name) and include your custom code in the appropriate functions.
 
 ### step 4.
 
@@ -56,7 +56,7 @@ EXTENDED_DESCRIPTION
 
 ### Installation
 
-1. Copy the `cac-column-COLUMN_NAME` folder into your `wp-content/plugins` folder
+1. Copy the `ac-column-COLUMN_NAME` folder into your `wp-content/plugins` folder
 2. Activate the COLUMN_LABEL plugin via the plugins admin page
 3. Create a new column via Admin Columns and select the COLUMN_LABEL column
 4. Please refer to the description for more info regarding the field type settings
