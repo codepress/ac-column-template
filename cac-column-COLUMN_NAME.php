@@ -81,7 +81,7 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
     }
 
     /**
-     * (Optional) Inline Edit store function. You can remove this function is you do not use it!
+     * (Optional) Saves the value after using inline-edit. You can remove this function is you do not use it!
      *
      * @param int $id Object ID
      * @param mixed $value Value to be saved
@@ -135,6 +135,12 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
 
         // Displays a dropdown menu with user display formats
         // $this->display_field_user_format();
+
+        // Displays a text field
+        // $this->display_field_text( $option_name, $label, $description );
+
+        // Displays a select field
+        // $this->display_field_select( $option_name, $label, $options, $description );
     }
 
     /*
