@@ -21,7 +21,7 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
         $this->properties['is_sortable'] = true;
 
         // (optional) Enable/Disable inline editing support for this column.
-        $this->properties['is_editable'] = true;
+        $this->properties['is_editable'] = false;
     }
 
     /**
@@ -60,6 +60,24 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
     }
 
     /**
+     * (Optional) Apply conditionals. You can remove this function is you do not use it!
+     *
+     * This determines whether the column should be available. If you want to disable this column
+     * for a particular posttype you can set this to false.
+     *
+     * @return bool True/False Default should be 'true'.
+     */
+    public function apply_conditional() {
+
+        // Example: if the posttype does not support thumbnails then return false
+        // if ( ! post_type_supports( $this->get_post_type(), 'thumbnail' ) ) {
+        //    return false;
+        // }
+
+        return true;
+    }
+
+    /**
      * (Optional) Inline editing settings. You can remove this function is you do not use it!
      *
      * @return array Editable settings
@@ -90,24 +108,6 @@ class CPAC_Column_COLUMN_NAME extends CPAC_Column {
 
         // Store the value that has been entered with inline-edit
         // For example: update_post_meta( $id, '_my_custom_field_example', $value );
-    }
-
-    /**
-     * (Optional) Apply conditionals. You can remove this function is you do not use it!
-     *
-     * This determines whether the column should be available. If you want to disable this column
-     * for a particular posttype you can set this to false.
-     *
-     * @return bool True/False Default should be 'true'.
-     */
-    public function apply_conditional() {
-
-        // Example: if the posttype does not support thumbnails then return false
-        // if ( ! post_type_supports( $this->get_post_type(), 'thumbnail' ) ) {
-        //    return false;
-        // }
-
-        return true;
     }
 
     /**
