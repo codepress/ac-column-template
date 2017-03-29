@@ -19,6 +19,9 @@ class ACP_Column_COLUMN_NAME extends AC_Column_COLUMN_NAME
 
 }
 
+/**
+ * Editing class. Adds editing functionality to the column.
+ */
 class ACP_Editing_Model_COLUMN_NAME extends ACP_Editing_Model {
 
 	/**
@@ -61,6 +64,9 @@ class ACP_Editing_Model_COLUMN_NAME extends ACP_Editing_Model {
 
 }
 
+/**
+ * Sorting class. Adds sorting functionality to the column.
+ */
 class ACP_Sorting_Model_COLUMN_NAME extends ACP_Sorting_Model {
 
 	/**
