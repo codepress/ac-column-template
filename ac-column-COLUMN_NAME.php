@@ -56,23 +56,23 @@ class AC_Column_COLUMN_NAME extends AC_Column {
 		// NOTE! When you use any of these settings, you should remove the get_value() method from this column, because the value will be formatted for you.
 
 		// Display an image preview size settings screen
-		$this->add_setting( new AC_Settings_Setting_Image( $this ) );
+		$this->add_setting( new AC_Settings_Column_Image( $this ) );
 
 		// Display an excerpt length input field
-		$this->add_setting( new AC_Settings_Setting_WordLimit( $this ) );
-		$this->add_setting( new AC_Settings_Setting_CharacterLimit( $this ) );
+		$this->add_setting( new AC_Settings_Column_WordLimit( $this ) );
+		$this->add_setting( new AC_Settings_Column_CharacterLimit( $this ) );
 
 		// Display a date format settings input field
-		$this->add_setting( new AC_Settings_Setting_Date( $this ) );
+		$this->add_setting( new AC_Settings_Column_Date( $this ) );
 
 		// Display before and after input fields
-		$this->add_setting( new AC_Settings_Setting_BeforeAfter( $this ) );
+		$this->add_setting( new AC_Settings_Column_BeforeAfter( $this ) );
 
 		// Displays a dropdown menu with user display formats
-		$this->add_setting( new AC_Settings_Setting_User( $this ) );
+		$this->add_setting( new AC_Settings_Column_User( $this ) );
 
 		// Displays a dropdown menu with post display formats
-		$this->add_setting( new AC_Settings_Setting_Post( $this ) );
+		$this->add_setting( new AC_Settings_Column_Post( $this ) );
 	}
 
 	/**
