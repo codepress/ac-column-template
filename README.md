@@ -6,6 +6,8 @@ Here you will find a starter-kit for creating a new column for Admin Columns. Th
 For more information about creating a new field type, please read the following article:
 https://www.admincolumns.com/documentation/how-to/register-column/
 
+This template is written for Admin Columns 4.0. The documentation for 3.0 can be found here: https://github.com/codepress/ac-column-template/tree/v3.<br>
+
 ( credits to Elliot for the readme structure )
 
 ### Structure
@@ -14,7 +16,8 @@ https://www.admincolumns.com/documentation/how-to/register-column/
 * `/js`:  folder for .js files
 * `/languages`: folder for .pot, .po and .mo files
 * `ac-COLUMN_NAME.php`: Main plugin file that registers the column
-* `ac-column-COLUMN_NAME.php`: Column class with all column logic
+* `ac-column-COLUMN_NAME.php`: Column class with all column logic for the free version
+* `acp-column-COLUMN_NAME.php`: Column class with all column logic for the pro version
 * `readme.txt`: WordPress readme file to be used by the wordpress repository
 
 ### step 1.
