@@ -7,7 +7,7 @@
  * --------------------------------------------
  */
 class ACP_Column_COLUMN_NAME extends AC_Column_COLUMN_NAME
-	implements ACP_Column_EditingInterface, ACP_Column_SortingInterface {
+	implements ACP_Column_EditingInterface, ACP_Column_SortingInterface, ACP_Export_Column {
 
 	public function editing() {
 		return new ACP_Editing_Model_COLUMN_NAME( $this );
@@ -15,6 +15,10 @@ class ACP_Column_COLUMN_NAME extends AC_Column_COLUMN_NAME
 
 	public function sorting() {
 		return new ACP_Sorting_Model_COLUMN_NAME( $this );
+	}
+
+	public function export() {
+		return new ACP_Export_Model_COLUMN_NAME( $this );
 	}
 
 }
@@ -97,6 +101,27 @@ class ACP_Sorting_Model_COLUMN_NAME extends ACP_Sorting_Model {
 			'ids' => $this->sort( $values ),
 		);
 
+	}
+
+}
+
+/**
+ * Export class. Adds export functionality to the column.
+ */
+class ACP_Export_Model_COLUMN_NAME extends ACP_Export_Model {
+
+	public function get_value( $id ) {
+
+		// Start editing here.
+
+		// Add the value you would like to be exported.
+		// For example: $value = get_post_meta( $id, '_my_custom_field_example', true );
+
+		$value = $this->column->get_raw_value( $id );
+
+		// Stop editing.
+
+		return $value;
 	}
 
 }
