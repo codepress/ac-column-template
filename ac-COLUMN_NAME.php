@@ -33,9 +33,12 @@ function ac_register_column_COLUMN_NAME( AC_ListScreen $list_screen ) {
 // -------------------------------------- //
 
 // 3. (Optional) Register the PRO column.
-add_action( 'acp/column_types', 'ac_register_pro_column_COLUMN_NAME' );
+add_action( 'ac/column_types', 'ac_register_pro_column_COLUMN_NAME' );
 
 function ac_register_pro_column_COLUMN_NAME( AC_ListScreen $list_screen ) {
+	if ( ! class_exists( 'ACP' ) ) {
+		return;
+	}
 
 	// Use the type: 'post', 'user', 'comment', 'media' or 'taxonomy'.
 	if ( 'post' === $list_screen->get_group() ) {
