@@ -1,6 +1,6 @@
 <?php
 
-class AC_Column_COLUMN_NAME extends AC_Column {
+class AC_Column_COLUMN_NAME extends \AC\Column {
 
 	public function __construct() {
 
@@ -15,6 +15,7 @@ class AC_Column_COLUMN_NAME extends AC_Column {
 	 * Returns the display value for the column.
 	 *
 	 * @param int $id ID
+	 *
 	 * @return string Value
 	 */
 	public function get_value( $post_id ) {
@@ -34,6 +35,7 @@ class AC_Column_COLUMN_NAME extends AC_Column {
 	 * This value will be used by 'inline-edit' and get_value().
 	 *
 	 * @param int $id ID
+	 *
 	 * @return mixed Value
 	 */
 	public function get_raw_value( $post_id ) {
@@ -56,25 +58,25 @@ class AC_Column_COLUMN_NAME extends AC_Column {
 		// NOTE! When you use any of these settings, you should remove the get_value() method from this column, because the value will be rendered by the AC_Settings_Column_{$type} classes.
 
 		// Display an image preview size settings screen
-		// $this->add_setting( new AC_Settings_Column_Image( $this ) );
+		// $this->add_setting( new \AC\Settings\Column\Image( $this ) );
 
 		// Display an excerpt length input field in words
-		// $this->add_setting( new AC_Settings_Column_WordLimit( $this ) );
+		// $this->add_setting( new \AC\Settings\Column\WordLimit( $this ) );
 
 		// Display an excerpt length input field in characters
-		// $this->add_setting( new AC_Settings_Column_CharacterLimit( $this ) );
+		// $this->add_setting( new \AC\Settings\Column\CharacterLimit( $this ) );
 
 		// Display a date format settings input field
-		// $this->add_setting( new AC_Settings_Column_Date( $this ) );
+		// $this->add_setting( new \AC\Settings\Column\Date( $this ) );
 
 		// Display before and after input fields
-		// $this->add_setting( new AC_Settings_Column_BeforeAfter( $this ) );
+		// $this->add_setting( new \AC\Settings\Column\BeforeAfter( $this ) );
 
 		// Displays a dropdown menu with user display formats
-		// $this->add_setting( new AC_Settings_Column_User( $this ) );
+		// $this->add_setting( new \AC\Settings\Column\User( $this ) );
 
 		// Displays a dropdown menu with post display formats
-		// $this->add_setting( new AC_Settings_Column_Post( $this ) );
+		// $this->add_setting( new \AC\Settings\Column\Post( $this ) );
 	}
 
 	/**
