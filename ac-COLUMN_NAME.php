@@ -17,7 +17,7 @@ load_plugin_textdomain( 'ac-COLUMN_NAME', false, plugin_dir_path( __FILE__ ) . '
 // 2. Register the column.
 add_action( 'ac/column_types', 'ac_register_column_COLUMN_NAME' );
 
-function ac_register_column_COLUMN_NAME( AC_ListScreen $list_screen ) {
+function ac_register_column_COLUMN_NAME( \AC\ListScreen $list_screen ) {
 
 	// Use the type: 'post', 'user', 'comment' or 'media'.
 	if ( 'post' === $list_screen->get_group() ) {
@@ -35,8 +35,8 @@ function ac_register_column_COLUMN_NAME( AC_ListScreen $list_screen ) {
 // 3. (Optional) Register the PRO column.
 add_action( 'ac/column_types', 'ac_register_pro_column_COLUMN_NAME' );
 
-function ac_register_pro_column_COLUMN_NAME( AC_ListScreen $list_screen ) {
-	if ( ! class_exists( 'ACP' ) ) {
+function ac_register_pro_column_COLUMN_NAME( \AC\ListScreen $list_screen ) {
+	if ( ! class_exists( '\ACP\AdminColumnsPro' ) ) {
 		return;
 	}
 

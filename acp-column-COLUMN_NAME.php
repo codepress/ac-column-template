@@ -7,7 +7,7 @@
  * --------------------------------------------
  */
 class ACP_Column_COLUMN_NAME extends AC_Column_COLUMN_NAME
-	implements ACP_Column_EditingInterface, ACP_Column_SortingInterface, ACP_Export_Column {
+	implements \ACP\Editing\Editable, \ACP\Sorting\Sortable, \ACP\Export\Exportable {
 
 	public function editing() {
 		return new ACP_Editing_Model_COLUMN_NAME( $this );
@@ -26,7 +26,7 @@ class ACP_Column_COLUMN_NAME extends AC_Column_COLUMN_NAME
 /**
  * Editing class. Adds editing functionality to the column.
  */
-class ACP_Editing_Model_COLUMN_NAME extends ACP_Editing_Model {
+class ACP_Editing_Model_COLUMN_NAME extends \ACP\Editing\Model {
 
 	/**
 	 * Editing view settings
@@ -56,7 +56,7 @@ class ACP_Editing_Model_COLUMN_NAME extends ACP_Editing_Model {
 	/**
 	 * Saves the value after using inline-edit
 	 *
-	 * @param int $id Object ID
+	 * @param int   $id    Object ID
 	 * @param mixed $value Value to be saved
 	 */
 	public function save( $id, $value ) {
@@ -71,7 +71,7 @@ class ACP_Editing_Model_COLUMN_NAME extends ACP_Editing_Model {
 /**
  * Sorting class. Adds sorting functionality to the column.
  */
-class ACP_Sorting_Model_COLUMN_NAME extends ACP_Sorting_Model {
+class ACP_Sorting_Model_COLUMN_NAME extends \ACP\Sorting\Model {
 
 	/**
 	 * (Optional) Put all the sorting logic here. You can remove this function if you want to sort by raw value only.
@@ -108,7 +108,7 @@ class ACP_Sorting_Model_COLUMN_NAME extends ACP_Sorting_Model {
 /**
  * Export class. Adds export functionality to the column.
  */
-class ACP_Export_Model_COLUMN_NAME extends ACP_Export_Model {
+class ACP_Export_Model_COLUMN_NAME extends \ACP\Export\Model {
 
 	public function get_value( $id ) {
 
