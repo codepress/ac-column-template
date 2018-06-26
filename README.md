@@ -10,6 +10,10 @@ This template is written for Admin Columns 4.0. The documentation for 3.0 can be
 
 ( credits to Elliot for the readme structure )
 
+### Important
+
+To use this tookit for Admin Columns Pro < 4.3 please use the no-namespace branch instead!
+
 ### Structure
 
 * `/css`: folder for .css files
