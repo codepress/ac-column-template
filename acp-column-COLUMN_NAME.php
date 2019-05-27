@@ -200,8 +200,8 @@ class ACP_Search_Model_COLUMN_NAME extends \ACP\Search\Comparison {
 
 		// Example altering the meta_query
 		$binding->meta_query( array(
-			'key'     => 'acf_text',
-			'value'   => 'aaa',
+			'key'     => 'text',
+			'value'   => $value->get_value(),
 			'compare' => $operator,
 		) );
 
