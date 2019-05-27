@@ -14,38 +14,20 @@ License URI:    http://www.gnu.org/licenses/gpl-2.0.html
 /* @link https://codex.wordpress.org/Function_Reference/load_plugin_textdomain */
 load_plugin_textdomain( 'ac-COLUMN_NAME', false, plugin_dir_path( __FILE__ ) . '/languages/' );
 
-// 2. Register the column.
-add_action( 'ac/column_types', 'ac_register_column_COLUMN_NAME' );
+add_action( 'ac/ready', function () {
+	\AC\Autoloader::instance()->register_prefix( 'AC\COLUMN_NAME', __DIR__ . '/classes/' );
 
-function ac_register_column_COLUMN_NAME( \AC\ListScreen $list_screen ) {
+	add_action( 'ac/column_types', function ( \AC\ListScreen $list_screen ) {
 
-	// Use the type: 'post', 'user', 'comment' or 'media'.
-	if ( 'post' === $list_screen->get_group() ) {
+		// Use the type: 'post', 'user', 'comment' or 'media'.
+		if ( 'post' === $list_screen->get_group() ) {
+			// Load this one if you only want to load the column without pro features
+			//$list_screen->register_column_type( new \AC\COLUMN_NAME\ColumnFree() );
 
-		require_once plugin_dir_path( __FILE__ ) . 'ac-column-COLUMN_NAME.php';
+			// Load this one if you wrote the column for Pro
+			$list_screen->register_column_type( new \AC\COLUMN_NAME\ColumnPro() );
+		}
 
-		$list_screen->register_column_type( new AC_Column_COLUMN_NAME );
-	}
-}
+	} );
 
-// -------------------------------------- //
-// This part is for the PRO version only. //
-// -------------------------------------- //
-
-// 3. (Optional) Register the PRO column.
-add_action( 'ac/column_types', 'ac_register_pro_column_COLUMN_NAME' );
-
-function ac_register_pro_column_COLUMN_NAME( \AC\ListScreen $list_screen ) {
-	if ( ! class_exists( '\ACP\AdminColumnsPro' ) ) {
-		return;
-	}
-
-	// Use the type: 'post', 'user', 'comment', 'media' or 'taxonomy'.
-	if ( 'post' === $list_screen->get_group() ) {
-
-		require_once plugin_dir_path( __FILE__ ) . 'ac-column-COLUMN_NAME.php';
-		require_once plugin_dir_path( __FILE__ ) . 'acp-column-COLUMN_NAME.php';
-
-		$list_screen->register_column_type( new ACP_Column_COLUMN_NAME );
-	}
-}
+} );

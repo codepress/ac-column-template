@@ -1,6 +1,7 @@
 <?php
+namespace AC\COLUMN_NAME;
 
-class AC_Column_COLUMN_NAME extends \AC\Column {
+class ColumnFree extends \AC\Column {
 
 	public function __construct() {
 
