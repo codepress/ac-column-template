@@ -1,5 +1,5 @@
 <?php
-namespace AC\COLUMN_NAME;
+namespace AC\Custom\COLUMN_NAME;
 
 use ACP\Editing\Editable;
 use ACP\Export\Exportable;

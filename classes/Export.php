@@ -1,5 +1,5 @@
 <?php
-namespace AC\COLUMN_NAME;
+namespace AC\Custom\COLUMN_NAME;
 
 /**
  * Export class. Adds export functionality to the column.

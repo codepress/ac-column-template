@@ -1,5 +1,5 @@
 <?php
-namespace AC\COLUMN_NAME;
+namespace AC\Custom\COLUMN_NAME;
 
 /**
  * Sorting class. Adds sorting functionality to the column.

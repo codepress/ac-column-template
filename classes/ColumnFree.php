@@ -1,5 +1,5 @@
 <?php
-namespace AC\COLUMN_NAME;
+namespace AC\Custom\COLUMN_NAME;
 
 class ColumnFree extends \AC\Column {
 
@@ -106,8 +106,8 @@ class ColumnFree extends \AC\Column {
 	 */
 	public function scripts() {
 
-		// wp_enqueue_script( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "js/column.js" );
-		// wp_enqueue_style( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "css/column.css" );
+		wp_enqueue_script( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "../js/column.js" );
+		wp_enqueue_style( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "../css/column.css" );
 	}
 
 }

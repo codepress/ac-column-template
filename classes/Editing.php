@@ -1,5 +1,5 @@
 <?php
-namespace AC\COLUMN_NAME;
+namespace AC\Custom\COLUMN_NAME;
 
 /**
  * Editing class. Adds editing functionality to the column.

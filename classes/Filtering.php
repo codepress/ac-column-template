@@ -1,13 +1,13 @@
 <?php
-namespace AC\COLUMN_NAME;
+namespace AC\Custom\COLUMN_NAME;
 
 class Filtering extends \ACP\Filtering\Model {
 
 	public function get_filtering_data() {
 		$data = array(
 			'options' => array(
-				'key' => 'Label',
-			), // Key => Value pair for the available options in the drop down
+				'value' => 'Label',
+			),
 		);
 
 		// (Optional) Order the options in the drop down menu
@@ -30,17 +30,17 @@ class Filtering extends \ACP\Filtering\Model {
 		);
 
 		// Example of altering query
-		add_filter( 'posts_where', array( $this, 'filter_by_custom_query' ), 10, 2 );
+		// add_filter( 'posts_where', array( $this, 'filter_by_custom_query' ), 10, 2 );
 
 		// Always return $vars, even when no filtering is done
 		return $vars;
 	}
 
-	public function filter_by_custom_query( $where, WP_Query $query ) {
+	public function filter_by_custom_query( $where, \WP_Query $query ) {
 		global $wpdb;
 
 		if ( $query->is_main_query() ) {
-			$where .= ''; // Alter the Where clauses with SQL
+			$where .= " AND {$wpdb->posts}.post_title = 'Something'"; // Alter the Where clauses with SQL
 		}
 
 		return $where;
