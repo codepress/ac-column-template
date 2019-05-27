@@ -7,7 +7,7 @@
  * --------------------------------------------
  */
 class ACP_Column_COLUMN_NAME extends AC_Column_COLUMN_NAME
-	implements \ACP\Editing\Editable, \ACP\Sorting\Sortable, \ACP\Export\Exportable {
+	implements \ACP\Editing\Editable, \ACP\Sorting\Sortable, \ACP\Export\Exportable, \ACP\Filtering\Filterable, \ACP\Search\Searchable {
 
 	public function editing() {
 		return new ACP_Editing_Model_COLUMN_NAME( $this );
@@ -21,6 +21,18 @@ class ACP_Column_COLUMN_NAME extends AC_Column_COLUMN_NAME
 		return new ACP_Export_Model_COLUMN_NAME( $this );
 	}
 
+	// Advanced
+	// Filtering
+	public function filtering() {
+		return new ACP_Filtering_Model_COLUMN_NAME( $this );
+	}
+
+	// Advanced
+	// Smart Filtering / Search
+	public function search() {
+		return new ACP_Search_Model_COLUMN_NAME();
+	}
+
 }
 
 /**
@@ -30,7 +42,6 @@ class ACP_Editing_Model_COLUMN_NAME extends \ACP\Editing\Model {
 
 	/**
 	 * Editing view settings
-	 *
 	 * @return array Editable settings
 	 */
 	public function get_view_settings() {
@@ -75,7 +86,6 @@ class ACP_Sorting_Model_COLUMN_NAME extends \ACP\Sorting\Model {
 
 	/**
 	 * (Optional) Put all the sorting logic here. You can remove this function if you want to sort by raw value only.
-	 *
 	 * @return array
 	 */
 	public function get_sorting_vars() {
@@ -122,6 +132,83 @@ class ACP_Export_Model_COLUMN_NAME extends \ACP\Export\Model {
 		// Stop editing.
 
 		return $value;
+	}
+
+}
+
+class ACP_Filtering_Model_COLUMN_NAME extends \ACP\Filtering\Model {
+
+	public function get_filtering_data() {
+		$data = array(
+			'options' => array(
+				'key' => 'Label',
+			), // Key => Value pair for the available options in the drop down
+		);
+
+		// (Optional) Order the options in the drop down menu
+		// $data['order'] = true;
+
+		// (Options) show empty options in the drop down.
+		// 	$data['empty_option'] = true;
+
+		return $data;
+	}
+
+	public function get_filtering_vars( $vars ) {
+		// All actual filtering logic goes here, you'll need to alter the WP_Query.
+		// $vars contains all WP_Query vars
+
+		// Example of Meta Query filter
+		$vars['meta_query'][] = array(
+			'key'   => 'meta_key', // For Meta columns, you can use $column->get_meta_key()
+			'value' => $this->get_filter_value(),
+		);
+
+		// Example of altering query
+		add_filter( 'posts_where', array( $this, 'filter_by_custom_query' ), 10, 2 );
+
+		// Always return $vars, even when no filtering is done
+		return $vars;
+	}
+
+	public function filter_by_custom_query( $where, WP_Query $query ) {
+		global $wpdb;
+
+		if ( $query->is_main_query() ) {
+			$where .= ''; // Alter the Where clauses with SQL
+		}
+
+		return $where;
+	}
+
+}
+
+class ACP_Search_Model_COLUMN_NAME extends \ACP\Search\Comparison {
+
+	public function __construct() {
+		$operators = new \ACP\Search\Operators( array(
+			\ACP\Search\Operators::EQ, // EQ = equal, NEW = not Equal, CONTAINS, NOT_CONTAINS, GT = Greater than, LT = Less than, IS_EMPTY, NOT_IS_EMPTY, BETWEEN
+		) );
+
+		$value = \ACP\Search\Value::STRING; // DATE, INT, DECIMAL
+
+		parent::__construct( $operators, $value );
+	}
+
+	protected function create_query_bindings( $operator, \ACP\Search\Value $value ) {
+		$binding = new \ACP\Search\Query\Bindings\Post();
+
+		// Example altering the meta_query
+		$binding->meta_query( array(
+			'key'     => 'text',
+			'value'   => $value->get_value(),
+			'compare' => $operator,
+		) );
+
+		// Example for altering the where clause
+		$binding->where( '1=1' );
+
+		return $binding;
 	}
 
 }
