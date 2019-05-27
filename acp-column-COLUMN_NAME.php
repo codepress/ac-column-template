@@ -22,11 +22,13 @@ class ACP_Column_COLUMN_NAME extends AC_Column_COLUMN_NAME
 	}
 
 	// Advanced
+	// Filtering
 	public function filtering() {
 		return new ACP_Filtering_Model_COLUMN_NAME( $this );
 	}
 
-	// Smart Filtering
+	// Advanced
+	// Smart Filtering / Search
 	public function search() {
 		return new ACP_Search_Model_COLUMN_NAME();
 	}
