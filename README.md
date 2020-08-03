@@ -6,7 +6,7 @@ Here you will find a starter-kit for creating a new column for Admin Columns. Th
 For more information about creating a new field type, please read the following article:
 https://www.admincolumns.com/documentation/how-to/register-column/
 
-This template is written for Admin Columns 4.0. The documentation for 3.0 can be found here: https://github.com/codepress/ac-column-template/tree/v3.<br>
+This template is written for Admin Columns 4.0.
 
 ( credits to Elliot for the readme structure )
 
@@ -20,8 +20,15 @@ To use this tookit for Admin Columns Pro < 4.3 please use the no-namespace branc
 * `/js`:  folder for .js files
 * `/languages`: folder for .pot, .po and .mo files
 * `ac-COLUMN_NAME.php`: Main plugin file that registers the column
-* `ac-column-COLUMN_NAME.php`: Column class with all column logic for the free version
-* `acp-column-COLUMN_NAME.php`: Column class with all column logic for the pro version
+* `/classes`: folder containing the separate logic classes
+* `/classes/ColumnFree.php`: Column class with all column logic for the free version
+* `/classes/ColumnPro.php`: Column class with all column logic for the pro version
+* `/classes/Editing.php`: Editing Model with all editing related logic
+* `/classes/Filtering.php`: Filtering Model with all filtering related logic
+* `/classes/Export.php`: Simple Export Model loaded through the Pro column
+* `/classes/Filtering.php`: Example Filtering Model loaded through Pro column
+* `/classes/SmartFiltering.php`: Example Smart Filtering Comparison (Model) loaded through Pro column
+* `/classes/Sorting.php`: Simple Sorting Model loaded through Pro column
 * `readme.txt`: WordPress readme file to be used by the wordpress repository
 
 ### step 1.

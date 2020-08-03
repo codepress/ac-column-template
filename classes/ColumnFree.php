@@ -1,6 +1,8 @@
 <?php
 
-class AC_Column_COLUMN_NAME extends \AC\Column {
+namespace AC\Custom\COLUMN_NAME;
+
+class ColumnFree extends \AC\Column {
 
 	public function __construct() {
 
@@ -50,7 +52,6 @@ class AC_Column_COLUMN_NAME extends \AC\Column {
 
 	/**
 	 * (Optional) Create extra settings for you column. These are visible when editing a column. You can remove this function is you do not use it!
-	 *
 	 * Write your own settings or use any of the standard available settings.
 	 */
 	protected function register_settings() {
@@ -81,10 +82,8 @@ class AC_Column_COLUMN_NAME extends \AC\Column {
 
 	/**
 	 * (Optional) Is valid. You can remove this function is you do not use it!
-	 *
 	 * This determines whether the column should be available. If you want to disable this column
 	 * for a particular post type you can set this to false.
-	 *
 	 * @return bool True/False Default should be 'true'.
 	 */
 	public function is_valid() {
@@ -105,8 +104,8 @@ class AC_Column_COLUMN_NAME extends \AC\Column {
 	 */
 	public function scripts() {
 
-		// wp_enqueue_script( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "js/column.js" );
-		// wp_enqueue_style( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "css/column.css" );
+		wp_enqueue_script( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "../js/column.js" );
+		wp_enqueue_style( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "../css/column.css" );
 	}
 
 }
