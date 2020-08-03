@@ -1,4 +1,5 @@
 <?php
+
 namespace AC\Custom\COLUMN_NAME;
 
 /**
@@ -13,9 +14,9 @@ class Editing extends \ACP\Editing\Model {
 	public function get_view_settings() {
 
 		// available types: text, textarea, media, float, togglable, select, select2_dropdown and select2_tags
-		$settings = array(
+		$settings = [
 			'type' => 'text',
-		);
+		];
 
 		// (Optional) Only applies to type: togglable, select, select2_dropdown and select2_tags
 		// $settings['options'] = array( 'value_1', 'value_2', 'etc.' );

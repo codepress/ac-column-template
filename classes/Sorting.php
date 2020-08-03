@@ -1,4 +1,5 @@
 <?php
+
 namespace AC\Custom\COLUMN_NAME;
 
 /**
@@ -11,9 +12,9 @@ class Sorting extends \ACP\Sorting\Model {
 	 * @return array
 	 */
 	public function get_sorting_vars() {
-		$values = array();
+		$values = [];
 
-		// Loops through all the available post/user/comment id's
+		// Loops through all the available ID's for `post`, `user` or `comment`.
 		foreach ( $this->strategy->get_results() as $id ) {
 
 			// Start editing here.
@@ -29,9 +30,9 @@ class Sorting extends \ACP\Sorting\Model {
 		}
 
 		// Sorts the array and return all id's to the main query
-		return array(
+		return [
 			'ids' => $this->sort( $values ),
-		);
+		];
 
 	}
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace AC\Custom\COLUMN_NAME;
 
 class ColumnFree extends \AC\Column {
@@ -51,7 +52,6 @@ class ColumnFree extends \AC\Column {
 
 	/**
 	 * (Optional) Create extra settings for you column. These are visible when editing a column. You can remove this function is you do not use it!
-	 *
 	 * Write your own settings or use any of the standard available settings.
 	 */
 	protected function register_settings() {
@@ -82,10 +82,8 @@ class ColumnFree extends \AC\Column {
 
 	/**
 	 * (Optional) Is valid. You can remove this function is you do not use it!
-	 *
 	 * This determines whether the column should be available. If you want to disable this column
 	 * for a particular post type you can set this to false.
-	 *
 	 * @return bool True/False Default should be 'true'.
 	 */
 	public function is_valid() {

@@ -20,14 +20,38 @@ add_action( 'ac/ready', function () {
 
 	add_action( 'ac/column_types', function ( \AC\ListScreen $list_screen ) {
 
-		// Use the type: 'post', 'user', 'comment' or 'media'.
-		if ( 'post' === $list_screen->get_group() ) {
-			// Load this one if you only want to load the column without pro features
-			//$list_screen->register_column_type( new \AC\Custom\COLUMN_NAME\ColumnFree() );
+		// Make your custom column available to a specific WordPress list table:
 
-			// Load this one if you wrote the column for Pro
+		// Example #1 - for the custom post type 'page'
+		if ( 'page' === $list_screen->get_key() ) {
+			// Register column
+
+			// Register a column WITHOUT pro features
+			// $list_screen->register_column_type( new \AC\Custom\COLUMN_NAME\ColumnFree() );
+
+			// Register a column WITH pro features
 			$list_screen->register_column_type( new \AC\Custom\COLUMN_NAME\ColumnPro() );
 		}
+
+		// Example #2 - for media
+		// if ( 'attachment' === $list_screen->get_key() ) {
+			// Register column
+		// }
+
+		// Example #3 - for all post types
+		// if ( \AC\MetaType::POST === $list_screen->get_meta_type() ) {
+			// Register column
+		// }
+
+		// Example #4 - for users
+		// if ( \AC\MetaType::USER === $list_screen->get_meta_type() ) {
+			// Register column
+		// }
+
+		// Example #4 - for categories on the taxonomy list table
+		// if ( $list_screen instanceof \ACP\ListScreen\Taxonomy && 'category' === $list_screen->get_taxonomy()) {
+			// Register column
+		// }
 
 	} );
 
