@@ -1,11 +1,11 @@
 <?php
 
-namespace AC\Custom\COLUMN_NAME;
+namespace CUSTOM_NAMESPACE\Sorting;
 
 /**
  * Sorting class. Adds sorting functionality to the column.
  */
-class Sorting extends \ACP\Sorting\Model {
+class COLUMN_NAME extends \ACP\Sorting\Model {
 
 	/**
 	 * (Optional) Put all the sorting logic here. You can remove this function if you want to sort by raw value only.

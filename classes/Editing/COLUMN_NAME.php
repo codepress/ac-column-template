@@ -1,11 +1,11 @@
 <?php
 
-namespace AC\Custom\COLUMN_NAME;
+namespace CUSTOM_NAMESPACE\Editing;
 
 /**
  * Editing class. Adds editing functionality to the column.
  */
-class Editing extends \ACP\Editing\Model {
+class COLUMN_NAME extends \ACP\Editing\Model {
 
 	/**
 	 * Editing view settings

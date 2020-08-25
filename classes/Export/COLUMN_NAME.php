@@ -1,11 +1,11 @@
 <?php
 
-namespace AC\Custom\COLUMN_NAME;
+namespace CUSTOM_NAMESPACE\Export;
 
 /**
  * Export class. Adds export functionality to the column.
  */
-class Export extends \ACP\Export\Model {
+class COLUMN_NAME extends \ACP\Export\Model {
 
 	public function get_value( $id ) {
 
