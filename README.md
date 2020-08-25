@@ -7,7 +7,6 @@ For more information about creating a new field type, please read the following 
 https://docs.admincolumns.com/article/21-how-to-create-my-own-column
 
 This template is for Admin Columns ánd Admin Columns Pro.
-It can also be used to create multiple columns in this plugin since the directory structur is prepared to contains multiple column classes.
 
 ### Structure
 
@@ -29,8 +28,8 @@ It can also be used to create multiple columns in this plugin since the director
 
 This template uses `PLACEHOLDERS` such as `COLUMN_NAME` throughout the file names and code. Use the following list of placeholders to do a 'find and replace':
 
-* `PLUGIN_NAME`: Single word, no spaced. Underscrores allowed. This is used for text domain statements and the namespace declaration
-* `CUSTOM_NAMESPACE`: Single word, no spaced. Underscrores allowed. This is used for text domain statements and the namespace declaration
+* `PLUGIN_NAME`: Single word, no spaced. Underscrores allowed. Used for the text-domain and plugin description.
+* `CUSTOM_NAMESPACE`: Single word, no spaced. Underscrores allowed. Used for the namespace declarations in the different class files.
 * `COLUMN_NAME`: Single word, no spaces. Underscores allowed. eg. donate_button
 * `COLUMN_LABEL`: Multiple words, can include spaces, visible when selecting a column
 * `PLUGIN_URL`: Url to the github or WordPress repository
@@ -42,15 +41,20 @@ This template uses `PLACEHOLDERS` such as `COLUMN_NAME` throughout the file name
 
 ### step 2.
 
-Edit the `ac-COLUMN_NAME.php` file (now renamed using your column name) and change the column type if necessary.
+Edit the `ac-PLUGIN_NAME.php` file (now renamed using your plugin name) and change the column type if necessary.
 
 ### step 3.
 
-Edit the `ac-column-COLUMN_NAME.php` file (now renamed using your column name) and include your custom code in the appropriate functions.
+Edit the `COLUMN_NAME.php` files (now renamed using your column name) and include your custom code in the appropriate functions.
 
 ### step 4.
 
 Edit this `README.md` file with the appropriate information and delete all content above and including the following line.
+
+### step 5 (optional).
+
+The structure of this plugin is prepared so that it can contain multiple columns.
+If you want to create multiple custom columns in this plugin, you can create a copy of each of the files and use a different name for your files that represents the column classes.
 
 -----------------------
 
@@ -66,7 +70,7 @@ EXTENDED_DESCRIPTION
 
 ### Installation
 
-1. Copy the `ac-column-COLUMN_NAME` folder into your `wp-content/plugins` folder
+1. Copy the `ac-column-template` folder into your `wp-content/plugins` folder
 2. Activate the COLUMN_LABEL plugin via the plugins admin page
 3. Create a new column via Admin Columns and select the COLUMN_LABEL column
 4. Please refer to the description for more info regarding the field type settings
