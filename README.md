@@ -13,7 +13,7 @@ This template is for Admin Columns ánd Admin Columns Pro.
 * `/css`: folder for .css files
 * `/js`:  folder for .js files
 * `/languages`: folder for .pot, .po and .mo files
-* `ac-COLUMN_NAME.php`: Main plugin file that registers the column
+* `ac-PLUGIN_NAME.php`: Main plugin file that registers the column
 * `/classes`: folder containing the separate logic classes
 * `/classes/Column/Free/COLUMN_NAME.php`: Column class with all column logic for the free version
 * `/classes/Column/Pro/COLUMN_NAME.php`: Column class with all column logic for the pro version
