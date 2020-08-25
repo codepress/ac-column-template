@@ -28,12 +28,12 @@ This template is for Admin Columns ánd Admin Columns Pro.
 
 This template uses `PLACEHOLDERS` such as `COLUMN_NAME` throughout the file names and code. Use the following list of placeholders to do a 'find and replace':
 
-* `PLUGIN_NAME`: Single word, no spaced. Underscrores allowed. Used for the text-domain and plugin description.
-* `CUSTOM_NAMESPACE`: Single word, no spaced. Underscrores allowed. Used for the namespace declarations in the different class files.
-* `COLUMN_NAME`: Single word, no spaces. Underscores allowed. eg. donate_button
+* `PLUGIN_NAME`: Single-word, no spaced. Underscores allowed. Used for the text-domain and plugin description.
+* `CUSTOM_NAMESPACE`: Single-word, no spaced. Underscores allowed. Used for the namespace declarations in the different class files.
+* `COLUMN_NAME`: Single-word, no spaces. Underscores allowed. eg. donate_button
 * `COLUMN_LABEL`: Multiple words, can include spaces, visible when selecting a column
 * `PLUGIN_URL`: Url to the github or WordPress repository
-* `PLUGIN_TAGS`: Comma seperated list of relevant tags
+* `PLUGIN_TAGS`: Comma separated list of relevant tags
 * `DESCRIPTION`: Brief description of the field type, no longer than 2 lines
 * `EXTENDED_DESCRIPTION`: Extended description of the field type
 * `AUTHOR_NAME`: Name of field type author
