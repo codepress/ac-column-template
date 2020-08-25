@@ -1,24 +1,21 @@
 <?php
 
-namespace AC\Custom\COLUMN_NAME;
+namespace CUSTOM_NAMESPACE\Column\Pro;
 
-use ACP\Editing\Editable;
-use ACP\Export\Exportable;
-use ACP\Filtering\Filterable;
-use ACP\Search\Searchable;
-use ACP\Sorting\Sortable;
+use CUSTOM_NAMESPACE;
+use ACP;
 
-class ColumnPro extends ColumnFree
-	implements Editable, Sortable, Filterable, Exportable, Searchable {
+class COLUMN_NAME extends CUSTOM_NAMESPACE\Column\Free\COLUMN_NAME
+	implements ACP\Editing\Editable, ACP\Sorting\Sortable, ACP\Filtering\Filterable, ACP\Export\Exportable, ACP\Search\Searchable {
 
 	public function editing() {
-		return new Editing( $this );
+		return new CUSTOM_NAMESPACE\Editing\COLUMN_NAME( $this );
 	}
 
 	public function sorting() {
 
 		// Example #1 - Sort any value
-		return new Sorting( $this );
+		return new CUSTOM_NAMESPACE\Sorting\COLUMN_NAME( $this );
 
 		// The following examples are recommended for large datasets. They are optimised queries and much faster.
 
@@ -37,16 +34,16 @@ class ColumnPro extends ColumnFree
 	}
 
 	public function export() {
-		return new Export( $this );
+		return new CUSTOM_NAMESPACE\Export\COLUMN_NAME( $this );
 	}
 
 	public function filtering() {
-		return new Filtering( $this );
+		return new CUSTOM_NAMESPACE\Filtering\COLUMN_NAME( $this );
 	}
 
 	// Smart Filtering (internally named: Search)
 	public function search() {
-		return new SmartFiltering();
+		return new CUSTOM_NAMESPACE\SmartFiltering\COLUMN_NAME();
 	}
 
 }

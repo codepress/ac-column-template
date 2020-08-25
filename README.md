@@ -4,9 +4,10 @@ Welcome to the Admin Columns column template repository.
 Here you will find a starter-kit for creating a new column for Admin Columns. This start-kit will work as a normal WP plugin.
 
 For more information about creating a new field type, please read the following article:
-https://www.admincolumns.com/documentation/guides/creating-new-column-type/
+https://docs.admincolumns.com/article/21-how-to-create-my-own-column
 
 This template is for Admin Columns ánd Admin Columns Pro.
+It can also be used to create multiple columns in this plugin since the directory structur is prepared to contains multiple column classes.
 
 ### Structure
 
@@ -15,20 +16,21 @@ This template is for Admin Columns ánd Admin Columns Pro.
 * `/languages`: folder for .pot, .po and .mo files
 * `ac-COLUMN_NAME.php`: Main plugin file that registers the column
 * `/classes`: folder containing the separate logic classes
-* `/classes/ColumnFree.php`: Column class with all column logic for the free version
-* `/classes/ColumnPro.php`: Column class with all column logic for the pro version
-* `/classes/Editing.php`: Editing Model with all editing related logic
-* `/classes/Filtering.php`: Filtering Model with all filtering related logic
-* `/classes/Export.php`: Simple Export Model loaded through the Pro column
-* `/classes/Filtering.php`: Example Filtering Model loaded through Pro column
-* `/classes/SmartFiltering.php`: Example Smart Filtering Comparison (Model) loaded through Pro column
-* `/classes/Sorting.php`: Simple Sorting Model loaded through Pro column
+* `/classes/Column/Free/COLUMN_NAME.php`: Column class with all column logic for the free version
+* `/classes/Column/Pro/COLUMN_NAME.php`: Column class with all column logic for the pro version
+* `/classes/Editing/COLUMN_NAME.php`: Editing Model with all editing related logic
+* `/classes/Export/COLUMN_NAME.php`: Simple Export Model loaded through the Pro column
+* `/classes/Filtering/COLUMN_NAME.php`: Example Filtering Model loaded through Pro column
+* `/classes/SmartFiltering/COLUMN_NAME.php`: Example Smart Filtering Comparison (Model) loaded through Pro column
+* `/classes/Sorting/COLUMN_NAME.php`: Simple Sorting Model loaded through Pro column
 * `readme.txt`: WordPress readme file to be used by the wordpress repository
 
 ### step 1.
 
 This template uses `PLACEHOLDERS` such as `COLUMN_NAME` throughout the file names and code. Use the following list of placeholders to do a 'find and replace':
 
+* `PLUGIN_NAME`: Single word, no spaced. Underscrores allowed. This is used for text domain statements and the namespace declaration
+* `CUSTOM_NAMESPACE`: Single word, no spaced. Underscrores allowed. This is used for text domain statements and the namespace declaration
 * `COLUMN_NAME`: Single word, no spaces. Underscores allowed. eg. donate_button
 * `COLUMN_LABEL`: Multiple words, can include spaces, visible when selecting a column
 * `PLUGIN_URL`: Url to the github or WordPress repository

@@ -1,8 +1,8 @@
 <?php
 
-namespace AC\Custom\COLUMN_NAME;
+namespace CUSTOM_NAMESPACE\SmartFiltering;
 
-class SmartFiltering extends \ACP\Search\Comparison {
+class COLUMN_NAME extends \ACP\Search\Comparison {
 
 	public function __construct() {
 		$operators = new \ACP\Search\Operators( [

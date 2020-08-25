@@ -1,8 +1,8 @@
 <?php
 
-namespace AC\Custom\COLUMN_NAME;
+namespace CUSTOM_NAMESPACE\Filtering;
 
-class Filtering extends \ACP\Filtering\Model {
+class COLUMN_NAME extends \ACP\Filtering\Model {
 
 	public function get_filtering_data() {
 		$data = [

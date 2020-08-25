@@ -1,8 +1,8 @@
 <?php
 
-namespace AC\Custom\COLUMN_NAME;
+namespace CUSTOM_NAMESPACE\Column\Free;
 
-class ColumnFree extends \AC\Column {
+class COLUMN_NAME extends \AC\Column {
 
 	public function __construct() {
 
@@ -104,8 +104,8 @@ class ColumnFree extends \AC\Column {
 	 */
 	public function scripts() {
 
-		wp_enqueue_script( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "../js/column.js" );
-		wp_enqueue_style( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "../css/column.css" );
+		wp_enqueue_script( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "../../../js/column.js" );
+		wp_enqueue_style( 'ac-COLUMN_NAME', plugin_dir_url( __FILE__ ) . "../../../css/column.css" );
 	}
 
 }
