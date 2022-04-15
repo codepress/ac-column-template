@@ -81,7 +81,7 @@ class COLUMN_NAME extends \AC\Column {
 	}
 
 	/**
-	 * (Optional) Is valid. You can remove this function is you do not use it!
+	 * (Optional) Is valid. You can remove this function if you do not use it!
 	 * This determines whether the column should be available. If you want to disable this column
 	 * for a particular post type you can set this to false.
 	 * @return bool True/False Default should be 'true'.
