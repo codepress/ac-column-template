@@ -2,9 +2,10 @@
 
 namespace CUSTOM_NAMESPACE\Column\Pro;
 
-use CUSTOM_NAMESPACE;
 use ACP;
+use CUSTOM_NAMESPACE;
 
+// In this example we extend the free version, but if you only want a pro version, there is no need to write a separate free column
 class COLUMN_NAME extends CUSTOM_NAMESPACE\Column\Free\COLUMN_NAME
 	implements ACP\Editing\Editable, ACP\Sorting\Sortable, ACP\Filtering\Filterable, ACP\Export\Exportable, ACP\Search\Searchable {
 

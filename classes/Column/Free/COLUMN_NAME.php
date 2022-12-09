@@ -26,7 +26,7 @@ class COLUMN_NAME extends \AC\Column {
 		$value = $this->get_raw_value( $post_id );
 
 		// optionally you can change the display of the value. In this example we added a post link.
-		$value = '<a href="' . esc_url( get_permalink( $post_id ) ) . '">' . $value . '</a>';
+		$value = $post_id . '<a href="' . esc_url( get_permalink( $post_id ) ) . '">' . $value . '</a>';
 
 		return $value;
 	}

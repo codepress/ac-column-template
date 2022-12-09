@@ -15,10 +15,29 @@ License URI:    http://www.gnu.org/licenses/gpl-2.0.html
 load_plugin_textdomain( 'ac-CUSTOM_NAMESPACE', false, plugin_dir_path( __FILE__ ) . '/languages/' );
 
 add_action( 'ac/ready', function () {
-	// We use our autoloader to automatically load all the necessary classes based on the namespace below
-	\AC\Autoloader::instance()->register_prefix( 'CUSTOM_NAMESPACE', __DIR__ . '/classes/' );
 
+	// Use the hook below if you only want a free column
 	add_action( 'ac/column_types', function ( \AC\ListScreen $list_screen ) {
+		require_once( __DIR__ . '/classes/Column/Free/COLUMN_NAME.php' );
+
+		// For more example, see the implementation for the pro column below
+
+		if ( 'page' === $list_screen->get_key() ) {
+			// Register a column for the Free version WITHOUT pro features
+			$list_screen->register_column_type( new \CUSTOM_NAMESPACE\Column\Free\COLUMN_NAME() );
+		}
+	} );
+
+	// Register the pro column that extends the free column
+	add_action( 'acp/column_types', function ( \AC\ListScreen $list_screen ) {
+		// Load all necessary classes or use an autoloader
+		require_once( __DIR__ . '/classes/Column/Free/COLUMN_NAME.php' );
+		require_once( __DIR__ . '/classes/Column/Pro/COLUMN_NAME.php' );
+		require_once( __DIR__ . '/classes/Editing/COLUMN_NAME.php' );
+		require_once( __DIR__ . '/classes/Export/COLUMN_NAME.php' );
+		require_once( __DIR__ . '/classes/Filtering/COLUMN_NAME.php' );
+		require_once( __DIR__ . '/classes/SmartFiltering/COLUMN_NAME.php' );
+		require_once( __DIR__ . '/classes/Sorting/COLUMN_NAME.php' );
 
 		// Make your custom column available to a specific WordPress list table:
 
