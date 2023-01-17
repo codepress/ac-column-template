@@ -2,6 +2,8 @@
 
 namespace CUSTOM_NAMESPACE\SmartFiltering;
 
+use ACP\Search\Query\Bindings;
+
 class COLUMN_NAME extends \ACP\Search\Comparison {
 
 	public function __construct() {
@@ -30,7 +32,7 @@ class COLUMN_NAME extends \ACP\Search\Comparison {
 		parent::__construct( $operators, $value );
 	}
 
-	protected function create_query_bindings( $operator, \ACP\Search\Value $value ) {
+	protected function create_query_bindings( $operator, \ACP\Search\Value $value ): Bindings {
 		$binding = new \ACP\Search\Query\Bindings\Post();
 
 		// Examples:
