@@ -1,16 +1,16 @@
 # Admin Columns - Column Template
 
-Welcome to the Admin Columns column template repository.
-Here you will find a starter-kit for creating a new column for Admin Columns. This start-kit will work as a normal WP plugin.
+Welcome to the Admin Columns Pro column template repository.
+Here you will find a starter-kit for creating a new column for Admin Columns Pro. This starter-kit will work as a normal WP plugin.
 
-For more information about creating a new field type, please read the following article:
+For more information about creating a new column type, please read the following article:
 https://docs.admincolumns.com/article/21-how-to-create-my-own-column
 
-This template is for Admin Columns Pro.
+This template is for Admin Columns Pro only.
 
 ### Structure
 
-* `ac-PLUGIN_NAME.php`: Main plugin file that registers the column
+* `ac-column-template.php`: Main plugin file that registers the column
 * `/classes/Column/CustomColumn.php`: Column class with all column logic
 * `/classes/Column/Editing.php`: Example of a Editing Model (used by inline- and bulk-editing)
 * `/classes/Column/Export.php`: Example of a Export Model
@@ -23,7 +23,7 @@ This template is for Admin Columns Pro.
 
 ### step 1.
 
-This template uses two placeholder. Use the following list to do a 'find and replace' on them:
+This template uses two placeholders. Use the following list to do a 'find and replace' on them:
 
 * `COLUMN_NAME`: Single-word, no spaces. Underscores allowed. eg. donate_button
 * `COLUMN_LABEL`: Multiple words, can include spaces, visible when selecting a column
