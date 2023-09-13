@@ -1,24 +1,22 @@
 <?php
-/*
-Plugin Name:    Admin Columns - PLUGIN_NAME
-Plugin URI:     PLUGIN_URL
-Description:    DESCRIPTION
-Version:        1.0
-Author:         AUTHOR_NAME
-Author URI:     AUTHOR_URL
-License:        GPLv2 or later
-License URI:    http://www.gnu.org/licenses/gpl-2.0.html
-*/
+/**
+ * Plugin Name: Admin Columns - COLUMN_LABEL
+ * Plugin URI: https://admincolumns.com
+ * Description: COLUMN_LABEL column for Admin Columns Pro
+ * Version: 1.0
+ * Requires PHP: 7.2
+ */
 
 const AC_CT_FILE = __FILE__;
 
-// 1. Set text domain
-/* @link https://codex.wordpress.org/Function_Reference/load_plugin_textdomain */
-load_plugin_textdomain('ac-column-template', false, __DIR__ . '/languages/');
-
-// 2. Register column type
+// 1. Register column type
 add_action('acp/column_types', static function (AC\ListScreen $list_screen): void {
-    // Load all necessary files
+    // Check for version requirement
+    if (ACP()->get_version()->is_lte(new AC\Plugin\Version('6.3'))) {
+        return;
+    }
+
+    // Load necessary files
     require_once __DIR__ . '/classes/Column/Column.php';
     require_once __DIR__ . '/classes/Column/Editing.php';
     require_once __DIR__ . '/classes/Column/Export.php';
@@ -56,3 +54,6 @@ add_action('acp/column_types', static function (AC\ListScreen $list_screen): voi
     // }
 
 });
+
+// 2. Optionally: load a text domain
+load_plugin_textdomain('ac-column-template', false, __DIR__ . '/languages/');

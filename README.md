@@ -25,7 +25,7 @@ This template is for Admin Columns Pro only.
 
 This template uses two placeholders. Use the following list to do a 'find and replace' on them:
 
-* `COLUMN_NAME`: Single-word, no spaces. Underscores allowed. eg. donate_button
+* `COLUMN_NAME`: Single-word, no spaces. Underscores allowed. eg. my-custom-column-name
 * `COLUMN_LABEL`: Multiple words, can include spaces, visible when selecting a column
 
 ### step 2.

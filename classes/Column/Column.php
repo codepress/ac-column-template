@@ -20,7 +20,7 @@ class Column extends AC\Column
     }
 
     /**
-     * Returns the display value for the column.
+     * Display value. Returns the column value used for rendering within the list table.
      */
     public function get_value($id): string
     {
@@ -38,17 +38,17 @@ class Column extends AC\Column
         return $value;
     }
 
-    /*
-     * (Optional) Enqueue CSS + JavaScript on the admin listings screen. You can remove this function is you do not use it!
-     *
-     * This action is called in the admin_head action on the listings screen where your column values are displayed.
-     * Use this action to add CSS + JavaScript
+    /**
+     * Editing model. Used by inline- and bulk-editing to update column values directly from within the list table.
      */
     public function editing()
     {
         return new Editing();
     }
 
+    /**
+     * Sorting model. Used to sort the list table when clicking the column header.
+     */
     public function sorting()
     {
         // Example #1 - Write your own sorting query
@@ -80,14 +80,19 @@ class Column extends AC\Column
         // Within this directory you will find all available sorting models: `admin-columns-pro/classes/Sorting/Model`.
     }
 
+    /**
+     * Export model. Used for exporting column values to CSV.
+     */
     public function export()
     {
         return new Export();
     }
 
+    /**
+     * Smart Filtering model (internally named: Search). Used to filter the list table when using our smart filters.
+     */
     public function search()
     {
-        // Smart Filtering (internally named: Search)
         return new Search();
     }
 
@@ -100,25 +105,25 @@ class Column extends AC\Column
         // NOTE! When you use any of these settings, you should remove the get_value() method from this column, because the value will be rendered by the AC_Settings_Column_{$type} classes.
 
         // Display an image preview size settings screen
-        // $this->add_setting( new \AC\Settings\Column\Image( $this ) );
+        // $this->add_setting( new AC\Settings\Column\Image( $this ) );
 
         // Display an excerpt length input field in words
-        // $this->add_setting( new \AC\Settings\Column\WordLimit( $this ) );
+        // $this->add_setting( new AC\Settings\Column\WordLimit( $this ) );
 
         // Display an excerpt length input field in characters
-        // $this->add_setting( new \AC\Settings\Column\CharacterLimit( $this ) );
+        // $this->add_setting( new AC\Settings\Column\CharacterLimit( $this ) );
 
         // Display a date format settings input field
-        // $this->add_setting( new \AC\Settings\Column\Date( $this ) );
+        // $this->add_setting( new AC\Settings\Column\Date( $this ) );
 
         // Display before and after input fields
-        // $this->add_setting( new \AC\Settings\Column\BeforeAfter( $this ) );
+        // $this->add_setting( new AC\Settings\Column\BeforeAfter( $this ) );
 
         // Displays a dropdown menu with user display formats
-        // $this->add_setting( new \AC\Settings\Column\User( $this ) );
+        // $this->add_setting( new AC\Settings\Column\User( $this ) );
 
         // Displays a dropdown menu with post display formats
-        // $this->add_setting( new \AC\Settings\Column\Post( $this ) );
+        // $this->add_setting( new AC\Settings\Column\Post( $this ) );
     }
 
     /**
@@ -137,10 +142,16 @@ class Column extends AC\Column
         return true;
     }
 
+    /*
+     * (Optional) Enqueue CSS + JavaScript on the admin listings screen. You can remove this function is you do not use it!
+     *
+     * This action is called in the admin_head action on the listings screen where your column values are displayed.
+     * Use this action to add CSS + JavaScript
+     */
     public function scripts(): void
     {
-        wp_enqueue_script('script-' . $this->get_name(), plugin_dir_url(AC_CT_FILE) . "/js/column.js");
-        wp_enqueue_style('style-' . $this->get_name(), plugin_dir_url(AC_CT_FILE) . "/css/column.css");
+        wp_enqueue_script('script-' . $this->get_name(), plugin_dir_url(AC_CT_FILE) . "js/column.js");
+        wp_enqueue_style('style-' . $this->get_name(), plugin_dir_url(AC_CT_FILE) . "css/column.css");
     }
 
 }

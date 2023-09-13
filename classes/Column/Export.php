@@ -14,9 +14,7 @@ class Export implements Service
     {
         // Return the value you would like to be exported
         // For example:
-        $value = get_post_meta($id, 'my_custom_field_key', true);
-
-        return $value;
+        return get_post_meta($id, 'my_custom_field_key', true);
     }
 
 }
