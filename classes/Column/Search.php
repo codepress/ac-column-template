@@ -41,13 +41,6 @@ class Search extends Comparison
         parent::__construct($operators, $value);
     }
 
-    /**
-     * The created Query Bindings will be parsed into SQL by these services:
-     * @see \ACP\Query\Post     This service injects the SQL bindings into `WP_Query`
-     * @see \ACP\Query\User     This service injects the SQL bindings into `WP_User_Query`
-     * @see \ACP\Query\Term     This service injects the SQL bindings into `WP_Term_Query`
-     * @see \ACP\Query\Comment  This service injects the SQL bindings into `WP_Comment_Query`
-     */
     protected function create_query_bindings(string $operator, Value $value): Bindings
     {
         /**
@@ -86,6 +79,13 @@ class Search extends Comparison
             )
         );
 
+        /**
+         * The created Query Bindings will be parsed into SQL by one of these services:
+         * @see \ACP\Query\Post This service injects the SQL bindings into `WP_Query`
+         * @see \ACP\Query\User This service injects the SQL bindings into `WP_User_Query`
+         * @see \ACP\Query\Term This service injects the SQL bindings into `WP_Term_Query`
+         * @see \ACP\Query\Comment This service injects the SQL bindings into `WP_Comment_Query`
+         */
         return $binding;
     }
 

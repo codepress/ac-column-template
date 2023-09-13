@@ -11,7 +11,7 @@ This template is for Admin Columns Pro only.
 ### Structure
 
 * `ac-column-template.php`: Main plugin file that registers the column
-* `/classes/Column/CustomColumn.php`: Column class with all column logic
+* `/classes/Column/Column.php`: Column class with all column logic
 * `/classes/Column/Editing.php`: Example of a Editing Model (used by inline- and bulk-editing)
 * `/classes/Column/Export.php`: Example of a Export Model
 * `/classes/Column/Search.php`: Example of a Smart Filtering Model
@@ -19,7 +19,7 @@ This template is for Admin Columns Pro only.
 * `/css`: folder for .css files
 * `/js`:  folder for .js files
 * `/languages`: folder for .pot, .po and .mo files
-* `readme.txt`: WordPress readme file to be used by the wordpress repository
+* `readme.txt`: WordPress readme file to be used by the WordPress repository
 
 ### step 1.
 
@@ -30,7 +30,7 @@ This template uses two placeholders. Use the following list to do a 'find and re
 
 ### step 2.
 
-Edit the `ac-column-template.php` file to change to which list table the column belongs.
+Edit the `ac-column-template.php` file to change which list table the column belongs too.
 
 ### step 3.
 

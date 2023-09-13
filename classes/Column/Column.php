@@ -43,7 +43,42 @@ class Column extends AC\Column
      */
     public function editing()
     {
+        /**
+         * Example #1 - Write your own sorting query
+         */
         return new Editing();
+
+        /**
+         * Example #2 - A `Text` input field for a custom field value
+         * @see ACP\Editing\Service\Basic Container for editing logic
+         * @see ACP\Editing\View\Text Type of input field
+         * @see ACP\Editing\Storage\Post\Meta Storage model. This `Meta` model stores the data as metadata.
+         */
+        // return new ACP\Editing\Service\Basic(
+        //     new ACP\Editing\View\Text(),
+        //     new ACP\Editing\Storage\Post\Meta('my_custom_field_key')
+        // );
+        /**
+         * List of available input types:
+         * @see ACP\Editing\View\Text
+         * @see ACP\Editing\View\TextArea
+         * @see ACP\Editing\View\Number
+         * @see ACP\Editing\View\Image
+         * @see ACP\Editing\View\Url
+         * @see ACP\Editing\View\Wysiwyg
+         * @see ACP\Editing\View\Select
+         * @see ACP\Editing\View\Toggle
+         * @see ACP\Editing\View\Media
+         * @see ACP\Editing\View\Password
+         * @see ACP\Editing\View\Taxonomy
+         * @see ACP\Editing\View\Color
+         * @see ACP\Editing\View\Email
+         * @see ACP\Editing\View\Date
+         * @see ACP\Editing\View\DateTime
+         * @see ACP\Editing\View\CheckboxList
+         * @see ACP\Editing\View\ComputedNumber
+         * @see ACP\Editing\View\Video
+         */
     }
 
     /**
@@ -51,10 +86,10 @@ class Column extends AC\Column
      */
     public function sorting()
     {
-        // Example #1 - Write your own sorting query
+        /**
+         * Example #1 - Write your own sorting query
+         */
         return new Sorting();
-
-        // The following examples are pre-configured and are shipped with Admin Columns Pro
 
         /**
          * Example #2 - Sorting by custom field values on the posts table
@@ -76,8 +111,9 @@ class Column extends AC\Column
          * @see ACP\Sorting\FormatValue\PostTitle
          */
         // return new ACP\Sorting\Model\Post\MetaFormat( new ACP\Sorting\FormatValue\PostTitle(), 'my_custom_field_key' );
-
-        // Within this directory you will find all available sorting models: `admin-columns-pro/classes/Sorting/Model`.
+        /**
+         * You will find all available sorting models in this folder: `admin-columns-pro/classes/Sorting/Model`.
+         */
     }
 
     /**
@@ -85,7 +121,22 @@ class Column extends AC\Column
      */
     public function export()
     {
+        /**
+         * Example #1 - A custom export model
+         */
         return new Export();
+
+        /**
+         * Example #2 - Export a custom field value
+         * @see ACP\Export\Model\Post\Meta
+         * @see ACP\Export\Model\User\Meta
+         * @see ACP\Export\Model\Term\Meta
+         * @see ACP\Export\Model\Comment\Meta
+         */
+        // return new ACP\Export\Model\Post\Meta('my_custom_field_key');
+        // return new ACP\Export\Model\User\Meta('my_custom_field_key');
+        // return new ACP\Export\Model\Meta\Meta('my_custom_field_key');
+        // return new ACP\Export\Model\Comment\Meta('my_custom_field_key');
     }
 
     /**
@@ -93,7 +144,33 @@ class Column extends AC\Column
      */
     public function search()
     {
+        /**
+         * Example #1 - A custom filtering model
+         */
         return new Search();
+
+        /**
+         * Example #2 - Filter by custom field values
+         */
+        // return new ACP\Search\Comparison\Meta\Text('my_custom_field_key');
+        // return new ACP\Search\Comparison\Meta\Number('my_custom_field_key');
+        /**
+         * List of available custom field models for search:
+         * @see ACP\Search\Comparison\Meta\Text
+         * @see ACP\Search\Comparison\Meta\Number
+         * @see ACP\Search\Comparison\Meta\Image
+         * @see ACP\Search\Comparison\Meta\Toggle
+         * @see ACP\Search\Comparison\Meta\Date
+         * @see ACP\Search\Comparison\Meta\DateTime\ISO
+         * @see ACP\Search\Comparison\Meta\DateTime\Timestamp
+         * @see ACP\Search\Comparison\Meta\User
+         * @see ACP\Search\Comparison\Meta\Post
+         * @see ACP\Search\Comparison\Meta\Media
+         * @see ACP\Search\Comparison\Meta\Decimal
+         * @see ACP\Search\Comparison\Meta\Select
+         * @see ACP\Search\Comparison\Meta\Checkmark
+         * @see ACP\Search\Comparison\Meta\Serialized
+         */
     }
 
     /**
