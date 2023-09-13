@@ -29,6 +29,7 @@ class Search extends Comparison
             // Operators::NOT_IS_EMPTY
             // Operators::BETWEEN
             Operators::EQ,
+            Operators::CONTAINS,
         ]);
 
         // Available value types:

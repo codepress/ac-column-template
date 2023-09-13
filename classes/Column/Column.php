@@ -44,7 +44,7 @@ class Column extends AC\Column
     public function editing()
     {
         /**
-         * Example #1 - Write your own sorting query
+         * Example #1 - A custom editing model
          */
         return new Editing();
 
@@ -59,7 +59,7 @@ class Column extends AC\Column
         //     new ACP\Editing\Storage\Post\Meta('my_custom_field_key')
         // );
         /**
-         * List of available input types:
+         * Available input types:
          * @see ACP\Editing\View\Text
          * @see ACP\Editing\View\TextArea
          * @see ACP\Editing\View\Number
@@ -87,7 +87,7 @@ class Column extends AC\Column
     public function sorting()
     {
         /**
-         * Example #1 - Write your own sorting query
+         * Example #1 - Write your own custom sorting query using this model
          */
         return new Sorting();
 
@@ -108,11 +108,10 @@ class Column extends AC\Column
          * In this example we want to sort by the Post `Title`, not the Post `ID` that is stored within the custom field.
          * We will convert each Post `ID` to a Post `Title` before we apply sorting.
          * @see ACP\Sorting\Model\Post\MetaFormat
-         * @see ACP\Sorting\FormatValue\PostTitle
          */
         // return new ACP\Sorting\Model\Post\MetaFormat( new ACP\Sorting\FormatValue\PostTitle(), 'my_custom_field_key' );
         /**
-         * You will find all available sorting models in this folder: `admin-columns-pro/classes/Sorting/Model`.
+         * You will find all available sorting models in this plugin folder: `admin-columns-pro/classes/Sorting/Model`.
          */
     }
 
@@ -155,7 +154,7 @@ class Column extends AC\Column
         // return new ACP\Search\Comparison\Meta\Text('my_custom_field_key');
         // return new ACP\Search\Comparison\Meta\Number('my_custom_field_key');
         /**
-         * List of available custom field models for search:
+         * Available custom field filtering models:
          * @see ACP\Search\Comparison\Meta\Text
          * @see ACP\Search\Comparison\Meta\Number
          * @see ACP\Search\Comparison\Meta\Image
