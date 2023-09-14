@@ -14,13 +14,6 @@ use ACP\Sorting\Type\Order;
 class Sorting extends AbstractModel implements QueryBindings
 {
 
-    /**
-     * The created Query Bindings will be parsed into SQL by these services:
-     * @see \ACP\Query\Post     This service injects the SQL bindings into `WP_Query`
-     * @see \ACP\Query\User     This service injects the SQL bindings into `WP_User_Query`
-     * @see \ACP\Query\Term     This service injects the SQL bindings into `WP_Term_Query`
-     * @see \ACP\Query\Comment  This service injects the SQL bindings into `WP_Comment_Query`
-     */
     public function create_query_bindings(Order $order): Bindings
     {
         global $wpdb;
@@ -52,6 +45,13 @@ class Sorting extends AbstractModel implements QueryBindings
             "$wpdb->posts.ID"
         );
 
+        /**
+         * The created Query Bindings will be parsed into SQL by one of these services:
+         * @see \ACP\Query\Post     This service injects the SQL bindings into `WP_Query`
+         * @see \ACP\Query\User     This service injects the SQL bindings into `WP_User_Query`
+         * @see \ACP\Query\Term     This service injects the SQL bindings into `WP_Term_Query`
+         * @see \ACP\Query\Comment  This service injects the SQL bindings into `WP_Comment_Query`
+         */
         return $bindings;
     }
 

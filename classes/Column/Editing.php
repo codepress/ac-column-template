@@ -28,24 +28,27 @@ class Editing implements ACP\Editing\Service
     public function get_view(string $context): ?View
     {
         /**
-         * Available input fields:
+         * Available input types:
          * @see View\Text
          * @see View\TextArea
-         * @see View\Media
-         * @see View\Email
          * @see View\Number
          * @see View\Image
+         * @see View\Url
+         * @see View\Email
+         * @see View\Wysiwyg
+         * @see View\Select
+         * @see View\Toggle
+         * @see View\Media
+         * @see View\Password
+         * @see View\Taxonomy
+         * @see View\Color
          * @see View\Date
          * @see View\DateTime
-         * @see View\Select
-         * @see View\Color
+         * @see View\CheckboxList
+         * @see View\ComputedNumber
          * @see View\AjaxSelect
-         * @see View\Taxonomy
-         * @see View\Url
-         * @see View\Toggle
-         * @see View\Wysiwyg
-         * @see View\Video
          * @see View\Audio
+         * @see View\Video
          */
         $view = new View\Text();
 

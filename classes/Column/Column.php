@@ -55,27 +55,6 @@ class Column extends AC\Column
          * @see ACP\Editing\View\Text Type of input field
          */
         // return new ACP\Editing\Service\Post\Meta('my_custom_field_key', new ACP\Editing\View\Text());
-        /**
-         * Available input types:
-         * @see ACP\Editing\View\Text
-         * @see ACP\Editing\View\TextArea
-         * @see ACP\Editing\View\Number
-         * @see ACP\Editing\View\Image
-         * @see ACP\Editing\View\Url
-         * @see ACP\Editing\View\Wysiwyg
-         * @see ACP\Editing\View\Select
-         * @see ACP\Editing\View\Toggle
-         * @see ACP\Editing\View\Media
-         * @see ACP\Editing\View\Password
-         * @see ACP\Editing\View\Taxonomy
-         * @see ACP\Editing\View\Color
-         * @see ACP\Editing\View\Email
-         * @see ACP\Editing\View\Date
-         * @see ACP\Editing\View\DateTime
-         * @see ACP\Editing\View\CheckboxList
-         * @see ACP\Editing\View\ComputedNumber
-         * @see ACP\Editing\View\Video
-         */
     }
 
     /**
