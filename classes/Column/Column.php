@@ -54,7 +54,7 @@ class Column extends AC\Column
          * @see ACP\Editing\Service\Post\Meta This model stores the data as metadata
          * @see ACP\Editing\View\Text Type of input field
          */
-        return new ACP\Editing\Service\Post\Meta('my_custom_field_key', new ACP\Editing\View\Text());
+        // return new ACP\Editing\Service\Post\Meta('my_custom_field_key', new ACP\Editing\View\Text());
         /**
          * Available input types:
          * @see ACP\Editing\View\Text
