@@ -226,8 +226,8 @@ class Column extends AC\Column
      */
     public function scripts(): void
     {
-        wp_enqueue_script('script-' . $this->get_name(), plugin_dir_url(AC_CT_FILE) . "js/column.js");
-        wp_enqueue_style('style-' . $this->get_name(), plugin_dir_url(AC_CT_FILE) . "css/column.css");
+        // wp_enqueue_script('script-' . $this->get_name(), plugin_dir_url(AC_CT_FILE) . "js/column.js");
+        // wp_enqueue_style('style-' . $this->get_name(), plugin_dir_url(AC_CT_FILE) . "css/column.css");
     }
 
 }
