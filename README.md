@@ -13,9 +13,9 @@ This template is for Admin Columns Pro only.
 * `ac-column-template.php`: Main plugin file that registers the column
 * `/classes/Column/Column.php`: Column class with all column logic
 * `/classes/Column/Editing.php`: Example of a Editing Model (used by inline- and bulk-editing)
-* `/classes/Column/Export.php`: Example of a Export Model
-* `/classes/Column/Search.php`: Example of a Smart Filtering Model
-* `/classes/Column/Sorting.php`: Example of a Sorting Model
+* `/classes/Column/Export.php`: Example of a Export Model (used by exporting to generate a CSV)
+* `/classes/Column/Search.php`: Example of a Smart Filtering Model (makes the column filterable)
+* `/classes/Column/Sorting.php`: Example of a Sorting Model (makes the column sortable)
 * `/css`: folder for .css files
 * `/js`:  folder for .js files
 * `/languages`: folder for .pot, .po and .mo files

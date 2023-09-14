@@ -8,6 +8,9 @@ use ACP\Sorting\Model\QueryBindings;
 use ACP\Sorting\Model\SqlOrderByFactory;
 use ACP\Sorting\Type\Order;
 
+/**
+ * Sorting model. Adds sorting functionality to the column.
+ */
 class Sorting extends AbstractModel implements QueryBindings
 {
 

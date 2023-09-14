@@ -5,7 +5,10 @@ namespace AcColumnTemplate\Column;
 use AC;
 use ACP;
 
-// In this example we extend the free version, but if you only want a pro version, there is no need to write a separate free column
+/**
+ * Column instance. Here you can set its label, display value, and add extra functionality such as sorting, filtering, export and editing.
+ * @link https://docs.admincolumns.com/article/21-how-to-create-my-own-column
+ */
 class Column extends AC\Column
     implements ACP\Editing\Editable, ACP\Sorting\Sortable, ACP\Export\Exportable, ACP\Search\Searchable
 {
@@ -29,35 +32,29 @@ class Column extends AC\Column
         $value = get_post_meta($id, 'my_custom_field_key', true) ?: '-';
 
         // Optionally you can change the display of the value. In this example we added an edit post link.
-        $value = sprintf(
-            '<a href="%s">%s</a>',
-            esc_url(get_edit_post_link($id)),
-            $value
-        );
+        $value = "<a href='" . get_edit_post_link($id) . "'>$value</a>";
 
         return $value;
     }
 
     /**
      * Editing model. Used by inline- and bulk-editing to update column values directly from within the list table.
+     * @link https://docs.admincolumns.com/article/27-how-to-use-inline-editing
+     * @link https://docs.admincolumns.com/article/67-how-to-use-bulk-editing
      */
     public function editing()
     {
         /**
-         * Example #1 - A custom editing model
+         * Example #1 - A custom editing model. Create your own input field and set how you want your data to be saved
          */
         return new Editing();
 
         /**
          * Example #2 - A `Text` input field for a custom field value
-         * @see ACP\Editing\Service\Basic Container for editing logic
+         * @see ACP\Editing\Service\Post\Meta This model stores the data as metadata
          * @see ACP\Editing\View\Text Type of input field
-         * @see ACP\Editing\Storage\Post\Meta Storage model. This `Meta` model stores the data as metadata.
          */
-        // return new ACP\Editing\Service\Basic(
-        //     new ACP\Editing\View\Text(),
-        //     new ACP\Editing\Storage\Post\Meta('my_custom_field_key')
-        // );
+        return new ACP\Editing\Service\Post\Meta('my_custom_field_key', new ACP\Editing\View\Text());
         /**
          * Available input types:
          * @see ACP\Editing\View\Text
@@ -83,6 +80,7 @@ class Column extends AC\Column
 
     /**
      * Sorting model. Used to sort the list table when clicking the column header.
+     * @link https://docs.admincolumns.com/article/34-how-to-enable-sorting
      */
     public function sorting()
     {
@@ -117,6 +115,7 @@ class Column extends AC\Column
 
     /**
      * Export model. Used for exporting column values to CSV.
+     * @link https://docs.admincolumns.com/article/69-how-to-use-export
      */
     public function export()
     {
@@ -140,6 +139,7 @@ class Column extends AC\Column
 
     /**
      * Smart Filtering model (internally named: Search). Used to filter the list table when using our smart filters.
+     * @link https://docs.admincolumns.com/article/61-how-to-use-smart-filtering
      */
     public function search()
     {

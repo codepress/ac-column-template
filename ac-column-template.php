@@ -56,4 +56,4 @@ add_action('acp/column_types', static function (AC\ListScreen $list_screen): voi
 });
 
 // 2. Optionally: load a text domain
-load_plugin_textdomain('ac-column-template', false, __DIR__ . '/languages/');
+// load_plugin_textdomain('ac-column-template', false, __DIR__ . '/languages/');
