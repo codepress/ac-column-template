@@ -5,6 +5,7 @@ namespace AcColumnTemplate\Column;
 use ACP\Query;
 use ACP\Query\Bindings;
 use ACP\Search\Comparison;
+use ACP\Search\Helper\Sql\ComparisonFactory;
 use ACP\Search\Operators;
 use ACP\Search\Value;
 
@@ -72,13 +73,14 @@ class Search extends Comparison
                 AND ac_filter.meta_key = 'my_custom_field_key'"
         );
 
-        // 2. Set the 'WHERE' statement
-        $binding->where(
-            $wpdb->prepare(
-                "ac_filter.meta_value = %s",
-                $value->get_value()
-            )
-        );
+        // 2. Create the `WHERE` clause. Use the `ComparisonFactory` to create a where-statement by operator (equal, contains etc.)
+        $where = ComparisonFactory::create(
+            'ac_filter.meta_value',
+            $operator,
+            $value
+        )->prepare();
+
+        $binding->where($where);
 
         /**
          * The created Query Bindings will be parsed into SQL by one of these services:
