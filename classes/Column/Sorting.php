@@ -3,7 +3,6 @@
 namespace AcColumnTemplate\Column;
 
 use ACP\Query\Bindings;
-use ACP\Sorting\AbstractModel;
 use ACP\Sorting\Model\QueryBindings;
 use ACP\Sorting\Model\SqlOrderByFactory;
 use ACP\Sorting\Type\Order;
@@ -11,7 +10,7 @@ use ACP\Sorting\Type\Order;
 /**
  * Sorting model. Adds sorting functionality to the column.
  */
-class Sorting extends AbstractModel implements QueryBindings
+class Sorting implements QueryBindings
 {
 
     public function create_query_bindings(Order $order): Bindings
