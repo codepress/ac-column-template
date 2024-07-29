@@ -1,11 +1,24 @@
 <?php
 /**
- * Plugin Name: Admin Columns - COLUMN_LABEL
- * Plugin URI: https://admincolumns.com
- * Description: COLUMN_LABEL column for Admin Columns Pro
- * Version: 1.0
- * Requires PHP: 7.2
+ * Plugin Name:       Go:Publish Selskaberne
+ * Plugin URI:        https://github.com/Retrofitterdk/gopublish-selskaberne
+ * Description:       COLUMN_LABEL column for Admin Columns Pro
+ * Version:           0.1.0
+ * Requires at least: 6.1
+ * Requires PHP:      7.2
+ * Requires Plugins:  shadow-terms
+ * Version:           0.1.0
+ * Author:            Retrofitter
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       gopublish-selskaberne
+ * Domain Path:       /languages
  */
+
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 const AC_CT_FILE = __FILE__;
 
@@ -26,7 +39,7 @@ add_action('acp/column_types', static function (AC\ListScreen $list_screen): voi
     // Make your custom column available to a specific WordPress list table:
 
     // Example #1 - for the custom post type 'page'
-    if ('page' === $list_screen->get_key()) {
+    if ('person' === $list_screen->get_key()) {
         // Register column
         $list_screen->register_column_type(
             new AcColumnTemplate\Column\Column()
@@ -56,4 +69,4 @@ add_action('acp/column_types', static function (AC\ListScreen $list_screen): voi
 });
 
 // 2. Optionally: load a text domain
-// load_plugin_textdomain('ac-column-template', false, __DIR__ . '/languages/');
+load_plugin_textdomain('gopublish-selskaberne', false, __DIR__ . '/languages/');

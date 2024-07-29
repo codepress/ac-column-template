@@ -16,10 +16,10 @@ class Column extends AC\Column
     public function __construct()
     {
         // Identifier, pick a unique name. Single word, no spaces. Underscores allowed.
-        $this->set_type('ac-COLUMN_NAME');
+        $this->set_type('ac-Organization_type');
 
         // Default column label.
-        $this->set_label(__('COLUMN_LABEL', 'ac-column-template'));
+        $this->set_label(__('Organization Type', 'ac-column-template'));
     }
 
     /**
@@ -29,7 +29,7 @@ class Column extends AC\Column
     {
         // put all the column logic here to retrieve the value you need
         // For example:
-        $value = get_post_meta($id, 'my_custom_field_key', true) ?: '-';
+        $value = get_post_meta($id, 'person_title', true) ?: '-';
 
         // Optionally you can change the display of the value. In this example we added an edit post link.
         $value = "<a href='" . get_edit_post_link($id) . "'>$value</a>";

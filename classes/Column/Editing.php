@@ -15,7 +15,7 @@ class Editing implements ACP\Editing\Service
     {
         // Retrieve the value for editing. This value will be displayed in the input field.
         // For example:
-        return get_post_meta($id, 'my_custom_field_key', true);
+        return get_post_meta($id, 'person_title', true);
     }
 
     /**
@@ -76,7 +76,7 @@ class Editing implements ACP\Editing\Service
     {
         // Store the value that has been entered with inline or bulk-edit
         // For example:
-        update_post_meta($id, 'my_custom_field_key', $data);
+        update_post_meta($id, 'person_title', $data);
     }
 
 }
