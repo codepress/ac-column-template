@@ -70,3 +70,40 @@ add_action('acp/column_types', static function (AC\ListScreen $list_screen): voi
 
 // 2. Optionally: load a text domain
 load_plugin_textdomain('gopublish-selskaberne', false, __DIR__ . '/languages/');
+
+
+function gp_get_associated_organization_ids($postID) {
+
+    $associatedPostIds = array();
+
+	$terms = get_the_terms(get_the_ID(),'organization_connect');
+		if ($terms) {
+    		foreach($terms as $term){
+	    		$termID = ($term->term_id);
+		    	$associatedPostIds[] = ShadowTerms\API\get_post_id($termID);
+            // $postID = ShadowTerms\API\get_post_id($termID);
+            // $specialty_bearing[] = (bool) get_post_meta( $postID, 'organization_specialty_bearing', true );
+		    }
+        // if (in_array(true, $specialty_bearing)) {
+		// 	return true;
+		// } else {
+		// 	return false;
+		// }
+	    }
+    return $associatedPostIds;
+}
+
+function gp_the_associated_organizations($postID) {
+    $specialty_bearing = array();
+    $associatedPostIds = gp_get_associated_organization_ids($postID);
+    foreach($associatedPostIds as $id){
+        $specialty_bearing[] = (bool) get_post_meta( $id, 'organization_specialty_bearing', true );
+    }
+    if (in_array(true, $specialty_bearing)) {
+        return true;
+    } else {
+        return false;
+    }
+    // return implode(",",$associatedPostIds);
+    // return gp_get_associated_organization_ids($postID);
+}

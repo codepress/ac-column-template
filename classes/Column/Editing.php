@@ -50,7 +50,9 @@ class Editing implements ACP\Editing\Service
          * @see View\Audio
          * @see View\Video
          */
-        $view = new View\Text();
+        // $view = new View\Text();
+        $view = null;
+
 
         // Example of a dropdown select:
         // $view = new View\Select([1 => 'Option #1', 2 => 'Option #2']);

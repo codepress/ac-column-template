@@ -20,6 +20,9 @@ class Column extends AC\Column
 
         // Default column label.
         $this->set_label(__('Organization Type', 'ac-column-template'));
+
+
+        // $this->set_field_type('TYPE_BOOLEAN');
     }
 
     /**
@@ -29,10 +32,13 @@ class Column extends AC\Column
     {
         // put all the column logic here to retrieve the value you need
         // For example:
-        $value = get_post_meta($id, 'person_title', true) ?: '-';
+        $value = gp_the_associated_organizations($id) ?: '-';
+
+        // return ac_helper()->icon->yes_or_no(1 === $value);
+
 
         // Optionally you can change the display of the value. In this example we added an edit post link.
-        $value = "<a href='" . get_edit_post_link($id) . "'>$value</a>";
+        // $value = "<a href='" . get_edit_post_link($id) . "'>$value</a>";
 
         return $value;
     }
