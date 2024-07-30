@@ -32,7 +32,7 @@ class Column extends AC\Column
     {
         // put all the column logic here to retrieve the value you need
         // For example:
-        $value = gp_the_associated_organizations($id) ?: '-';
+        $value = gp_get_associated_organization_status($id) ?: '-';
 
         // return ac_helper()->icon->yes_or_no(1 === $value);
 
