@@ -35,6 +35,7 @@ add_action('acp/column_types', static function (AC\ListScreen $list_screen): voi
     require_once __DIR__ . '/classes/Column/Export.php';
     require_once __DIR__ . '/classes/Column/Search.php';
     require_once __DIR__ . '/classes/Column/Sorting.php';
+    require_once __DIR__ . '/inc/import-functions.php';
 
     // Make your custom column available to a specific WordPress list table:
 
@@ -70,6 +71,39 @@ add_action('acp/column_types', static function (AC\ListScreen $list_screen): voi
 
 // 2. Optionally: load a text domain
 load_plugin_textdomain('gopublish-selskaberne', false, __DIR__ . '/languages/');
+
+if ( ! function_exists( 'gp_selskaberne_loader' ) ) {
+
+	function gp_selskaberne_loader() {
+        require_once plugin_dir_path( __FILE__ ) . '/inc/import-functions.php';
+
+	}
+}
+add_action( 'plugins_loaded', 'gp_selskaberne_loader' );
+
+/**
+ * Add default template for new Posts with the Featured Image as the first block
+ */
+function wpdocs_default_posts_template( $args ) {
+
+    $args['rewrite']['slug'] = 'artikler';
+
+    return $args;
+}
+add_filter( 'register_post_post_type_args', 'wpdocs_default_posts_template' );
+
+
+function gp_set_organization_slug () {
+    return 'organisationer';
+}
+add_filter( 'organization_rewrite_slug', 'gp_set_organization_slug' );
+add_filter( 'organization_archive_slug', 'gp_set_organization_slug' );
+
+function gp_set_person_slug () {
+    return 'personer';
+}
+add_filter( 'person_rewrite_slug', 'gp_set_person_slug' );
+add_filter( 'person_archive_slug', 'gp_set_person_slug' );
 
 // Get IDs of associated organizations
 function gp_get_associated_organization_ids($postID) {
