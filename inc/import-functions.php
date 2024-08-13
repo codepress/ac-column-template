@@ -1,5 +1,10 @@
 <?php
 
+function gp_convert_timestamp($timestamp) {
+	$dateTimeFormat = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
+	return wp_date( $dateTimeFormat, $timestamp );
+}
+
 function gp_get_date_time ($value) {
     $processor = new WP_HTML_Tag_Processor( $value );
     if ( $processor->next_tag( 'time' ) ) {
@@ -8,6 +13,55 @@ function gp_get_date_time ($value) {
     }
     return $value;
 }
+
+
+
+function gp_fix_post_meta($value, $post_id, $key) {
+    
+    // Only check 'organization_specialty_bearing'.
+    if ($key == 'organization_specialty_bearing') {
+
+        // Check if it has the right value.
+        if ($value == 'Ikke-specialebærende selskab') {
+			
+            $value = null;
+
+        }
+    }
+	
+	// Only check 'person_is_phone_public'.
+   if ($key == 'person_is_phone_public') {
+
+        // Check if it has the right value.
+        if ($value == 'Nej') {
+			
+            $value = null;
+
+        }
+    }
+	
+	// Only check 'person_is_email_public'.
+   if ($key == 'person_is_email_public') {
+
+        // Check if it has the right value.
+        if ($value == 'Nej') {
+			
+            $value = null;
+
+        }
+    }
+	// Only check 'person_address'.
+   if ($key == 'person_address') {
+			
+            $value = wp_strip_all_tags($value);
+
+    }
+	
+    return $value;
+
+}
+add_filter('pmxi_custom_field', 'gp_fix_post_meta', 10, 3);
+
 
 function gp_get_url_by_image_id ($image_id, $post_type = 'image') {
     if(!$image_id) {
@@ -301,3 +355,14 @@ function gp_get_document_thumbnail_id ($image_id, $post_type = 'document') {
 
     return $thumbnail_id;
 }
+
+function gp_rest_after_insert_after_import( $post_id, $xml, $is_update ) {
+	$post = get_post($post_id);
+	$post_type = get_post_type($post_id);
+	if ( $post_type == 'person' ) {
+ 		gp_set_associated_organization_status($post);
+	}
+}
+add_action('pmxi_saved_post', 'gp_rest_after_insert_after_import', 10, 3);
+
+
