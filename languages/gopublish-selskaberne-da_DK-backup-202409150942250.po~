@@ -1,0 +1,157 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Go:Publish Selskaberne\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-13 07:57+0000\n"
+"PO-Revision-Date: 2024-09-13 08:35+0000\n"
+"Last-Translator: \n"
+"Language-Team: Dansk\n"
+"Language: da_DK\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.11; wp-6.6.2\n"
+"X-Domain: gopublish-selskaberne"
+
+#: gopublish-selskaberne.php:129
+msgid "Add new"
+msgstr "Tilføj ny"
+
+#: gopublish-selskaberne.php:130
+msgid "Add new Theme"
+msgstr "Tilføj nyt tema"
+
+#: gopublish-selskaberne.php:128
+msgid "All Themes"
+msgstr "Alle temaer"
+
+#. Description of the plugin
+msgid "COLUMN_LABEL column for Admin Columns Pro"
+msgstr ""
+
+#: gopublish-selskaberne.php:131
+msgid "Edit Theme"
+msgstr "Rediger tema"
+
+#: gopublish-selskaberne.php:139
+msgid "Featured image for this Theme"
+msgstr ""
+
+#: gopublish-selskaberne.php:146
+msgid "Filter Themes list"
+msgstr ""
+
+#. Name of the plugin
+msgid "Go:Publish Selskaberne"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://github.com/Retrofitterdk/gopublish-selskaberne"
+msgstr ""
+
+#: gopublish-selskaberne.php:144
+msgid "Insert into Theme"
+msgstr ""
+
+#: gopublish-selskaberne.php:132
+msgid "New Theme"
+msgstr ""
+
+#: gopublish-selskaberne.php:136
+msgid "No Themes found"
+msgstr ""
+
+#: gopublish-selskaberne.php:137
+msgid "No Themes found in trash"
+msgstr ""
+
+#: gopublish-selskaberne.php:138
+msgid "Parent Theme"
+msgstr ""
+
+#: gopublish-selskaberne.php:157
+msgid "Parent Theme:"
+msgstr ""
+
+#: gopublish-selskaberne.php:141
+msgid "Remove featured image for this Theme"
+msgstr ""
+
+#. Author of the plugin
+msgid "Retrofitter"
+msgstr ""
+
+#: gopublish-selskaberne.php:135
+msgid "Search Themes"
+msgstr ""
+
+#: gopublish-selskaberne.php:140
+msgid "Set featured image for this Theme"
+msgstr ""
+
+#: gopublish-selskaberne.php:125 gopublish-selskaberne.php:150
+msgid "Theme"
+msgstr ""
+
+#: gopublish-selskaberne.php:143
+msgid "Theme archives"
+msgstr ""
+
+#: gopublish-selskaberne.php:151
+msgid "Theme published"
+msgstr ""
+
+#: gopublish-selskaberne.php:152
+msgid "Theme published privately"
+msgstr ""
+
+#: gopublish-selskaberne.php:153
+msgid "Theme reverted to draft"
+msgstr ""
+
+#: gopublish-selskaberne.php:155
+msgid "Theme scheduled"
+msgstr ""
+
+#: gopublish-selskaberne.php:154
+msgid "Theme trashed"
+msgstr ""
+
+#: gopublish-selskaberne.php:156
+msgid "Theme updated"
+msgstr ""
+
+#: gopublish-selskaberne.php:124 gopublish-selskaberne.php:126
+#: gopublish-selskaberne.php:127
+msgid "Themes"
+msgstr "Temaer"
+
+#: gopublish-selskaberne.php:149
+msgid "Themes attributes"
+msgstr ""
+
+#: gopublish-selskaberne.php:148
+msgid "Themes list"
+msgstr ""
+
+#: gopublish-selskaberne.php:147
+msgid "Themes list navigation"
+msgstr ""
+
+#: gopublish-selskaberne.php:145
+msgid "Upload to this Theme"
+msgstr ""
+
+#: gopublish-selskaberne.php:142
+msgid "Use as featured image for this Theme"
+msgstr ""
+
+#: gopublish-selskaberne.php:133
+msgid "View Theme"
+msgstr "Se tema"
+
+#: gopublish-selskaberne.php:134
+msgid "View Themes"
+msgstr "Se temaer"
