@@ -9,6 +9,22 @@
 
 const AC_CT_FILE = __FILE__;
 
+add_action(
+    'ac/v2/column_types',
+    function (AC\ColumnFactoryDefinitionCollection $collection, AC\TableScreen $table_screen) {
+        require_once __DIR__ . '/classes/ColumnFactory/HelloWorld.php';
+
+        if ($table_screen instanceof AC\PostType && $table_screen->get_post_type()->equals('post')) {
+            $collection->add(
+                new AC\Type\ColumnFactoryDefinition(
+                    AcColumnTemplate\ColumnFactory\HelloWorld::class,
+                )
+            );
+        }
+    }
+    , 10, 2
+);
+
 // 1. Register column type
 add_action('acp/column_types', static function (AC\ListScreen $list_screen): void {
     // Check for version requirement
