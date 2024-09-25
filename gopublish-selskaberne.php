@@ -20,6 +20,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+* Load plugin textdomain.
+*
+* @since 0.1.0
+*/
+
+if ( ! function_exists( 'gp_selskaberne_load_textdomain' ) ) {
+	function gp_selskaberne_load_textdomain() {
+		load_plugin_textdomain( 'gopublish-selskaberne', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+	}
+}
+add_action( 'plugins_loaded', 'gp_selskaberne_load_textdomain' );
+
 const AC_CT_FILE = __FILE__;
 
 // 1. Register column type
@@ -76,21 +89,10 @@ if ( ! function_exists( 'gp_selskaberne_loader' ) ) {
 
 	function gp_selskaberne_loader() {
         require_once plugin_dir_path( __FILE__ ) . '/inc/import-functions.php';
-
+        require_once plugin_dir_path( __FILE__ ) . '/inc/functions-posttypes.php';
 	}
 }
 add_action( 'plugins_loaded', 'gp_selskaberne_loader' );
-
-/**
- * Add default template for new Posts with the Featured Image as the first block
- */
-function wpdocs_default_posts_template( $args ) {
-
-    $args['rewrite']['slug'] = 'artikler';
-
-    return $args;
-}
-add_filter( 'register_post_post_type_args', 'wpdocs_default_posts_template' );
 
 
 function gp_set_organization_slug () {
@@ -104,6 +106,62 @@ function gp_set_person_slug () {
 }
 add_filter( 'person_rewrite_slug', 'gp_set_person_slug' );
 add_filter( 'person_archive_slug', 'gp_set_person_slug' );
+
+function gp_set_collection_slug () {
+    return 'temaer';
+}
+add_filter( 'collection_rewrite_slug', 'gp_set_collection_slug' );
+add_filter( 'collection_archive_slug', 'gp_set_collection_slug' );
+
+/**
+ * Add default template for new Posts with the Featured Image as the first block
+ */
+
+if ( ! function_exists( 'gp_selskaberne_change_collection_labels' ) ) {
+
+    function gp_selskaberne_change_collection_labels( $args ) {
+
+        $args['label'] = esc_html__( "Themes", "gopublish-selskaberne" );
+        $args['labels']['name'] = esc_html__( "Theme", "gopublish-selskaberne" );
+        $args['labels']['singular_name'] = esc_html__( "Themes", "gopublish-selskaberne" );
+        $args['labels']['menu_name'] = esc_html__( "Themes", "gopublish-selskaberne" );
+        $args['labels']['all_items'] = esc_html__( "All Themes", "gopublish-selskaberne" );
+        $args['labels']['add_new'] = esc_html__( "Add new", "gopublish-selskaberne" );
+        $args['labels']['add_new_item'] = esc_html__( "Add new Theme", "gopublish-selskaberne" );
+        $args['labels']['edit_item'] = esc_html__( "Edit Theme", "gopublish-selskaberne" );
+        $args['labels']['new_item'] = esc_html__( "New Theme", "gopublish-selskaberne" );
+        $args['labels']['view_item'] = esc_html__( "View Theme", "gopublish-selskaberne" );
+        $args['labels']['view_items'] = esc_html__( "View Themes", "gopublish-selskaberne" );
+        $args['labels']['search_items'] = esc_html__( "Search Themes", "gopublish-selskaberne" );
+        $args['labels']['not_found'] = esc_html__( "No Themes found", "gopublish-selskaberne" );
+        $args['labels']['not_found_in_trash'] = esc_html__( "No Themes found in trash", "gopublish-selskaberne" );
+        $args['labels']['parent'] = esc_html__( "Parent Theme", "gopublish-selskaberne" );
+        $args['labels']['featured_image'] = esc_html__( "Featured image for this Theme", "gopublish-selskaberne" );
+        $args['labels']['set_featured_image'] = esc_html__( "Set featured image for this Theme", "gopublish-selskaberne" );
+        $args['labels']['remove_featured_image'] = esc_html__( "Remove featured image for this Theme", "gopublish-selskaberne" );
+        $args['labels']['use_featured_image'] = esc_html__( "Use as featured image for this Theme", "gopublish-selskaberne" );
+        $args['labels']['archives'] = esc_html__( "Theme archives", "gopublish-selskaberne" );
+        $args['labels']['insert_into_item'] = esc_html__( "Insert into Theme", "gopublish-selskaberne" );
+        $args['labels']['uploaded_to_this_item'] = esc_html__( "Upload to this Theme", "gopublish-selskaberne" );
+        $args['labels']['filter_items_list'] = esc_html__( "Filter Themes list", "gopublish-selskaberne" );
+        $args['labels']['items_list_navigation'] = esc_html__( "Themes list navigation", "gopublish-selskaberne" );
+        $args['labels']['items_list'] = esc_html__( "Themes list", "gopublish-selskaberne" );
+        $args['labels']['attributes'] = esc_html__( "Themes attributes", "gopublish-selskaberne" );
+        $args['labels']['name_admin_bar'] = esc_html__( "Theme", "gopublish-selskaberne" );
+        $args['labels']['item_published'] = esc_html__( "Theme published", "gopublish-selskaberne" );
+        $args['labels']['item_published_privately'] = esc_html__( "Theme published privately", "gopublish-selskaberne" );
+        $args['labels']['item_reverted_to_draft'] = esc_html__( "Theme reverted to draft", "gopublish-selskaberne" );
+        $args['labels']['item_trashed'] = esc_html__( "Theme trashed", "gopublish-selskaberne" );
+        $args['labels']['item_scheduled'] = esc_html__( "Theme scheduled", "gopublish-selskaberne" );
+        $args['labels']['item_updated'] = esc_html__( "Theme updated", "gopublish-selskaberne" );
+        $args['labels']['parent_item_colon'] = esc_html__( "Parent Theme:", "gopublish-selskaberne" );
+
+        return $args;
+    }
+}
+add_filter( 'register_collection_post_type_args', 'gp_selskaberne_change_collection_labels' );
+
+
 
 // Get IDs of associated organizations
 function gp_get_associated_organization_ids($postID) {
@@ -180,3 +238,20 @@ function gp_after_organization_update($post) {
     }
 }
 add_action( 'rest_after_insert_organization', 'gp_after_organization_update', 100, 1 );
+
+if ( ! function_exists( 'gp_event_listing_register_post_meta' ) ) {
+    function gp_event_listing_register_post_meta() {
+        register_post_meta(
+            'event_listing',
+            'event_start_date',
+            array(
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            )
+        );
+
+    }
+}
+add_action( 'init', 'gp_event_listing_register_post_meta' );
+add_action( 'rest_api_init', 'gp_event_listing_register_post_meta' );
