@@ -33,57 +33,13 @@ if ( ! function_exists( 'gp_selskaberne_load_textdomain' ) ) {
 }
 add_action( 'plugins_loaded', 'gp_selskaberne_load_textdomain' );
 
-const AC_CT_FILE = __FILE__;
-
-// 1. Register column type
-add_action('acp/column_types', static function (AC\ListScreen $list_screen): void {
-    // Check for version requirement
-    if (ACP()->get_version()->is_lte(new AC\Plugin\Version('6.3'))) {
-        return;
-    }
-
-    // Load necessary files
-    require_once __DIR__ . '/classes/Column/Column.php';
-    require_once __DIR__ . '/classes/Column/Editing.php';
-    require_once __DIR__ . '/classes/Column/Export.php';
-    require_once __DIR__ . '/classes/Column/Search.php';
-    require_once __DIR__ . '/classes/Column/Sorting.php';
-    require_once __DIR__ . '/inc/import-functions.php';
-
-    // Make your custom column available to a specific WordPress list table:
-
-    // Example #1 - for the custom post type 'page'
-    if ('person' === $list_screen->get_key()) {
-        // Register column
-        $list_screen->register_column_type(
-            new AcColumnTemplate\Column\Column()
-        );
-    }
-
-    // Example #2 - for media
-    // if ( 'attachment' === $list_screen->get_key() ) {
-    // Register column
-    // }
-
-    // Example #3 - for all post types
-    // if ( AC\MetaType::POST === $list_screen->get_meta_type() ) {
-    // Register column
-    // }
-
-    // Example #4 - for users
-    // if ( AC\MetaType::USER === $list_screen->get_meta_type() ) {
-    // Register column
-    // }
-
-    // Example #4 - for categories on the taxonomy list table
-    // if ( $list_screen instanceof ACP\ListScreen\Taxonomy && 'category' === $list_screen->get_taxonomy()) {
-    // Register column
-    // }
-
-});
-
-// 2. Optionally: load a text domain
-load_plugin_textdomain('gopublish-selskaberne', false, __DIR__ . '/languages/');
+/**
+* Loads files from the '/inc' folder.
+*
+* @since  0.1.0
+* @access public
+* @return void
+*/
 
 if ( ! function_exists( 'gp_selskaberne_loader' ) ) {
 
@@ -94,7 +50,7 @@ if ( ! function_exists( 'gp_selskaberne_loader' ) ) {
 }
 add_action( 'plugins_loaded', 'gp_selskaberne_loader' );
 
-
+// Change default slugs for post types organization, person and collection
 function gp_set_organization_slug () {
     return 'organisationer';
 }
@@ -114,7 +70,7 @@ add_filter( 'collection_rewrite_slug', 'gp_set_collection_slug' );
 add_filter( 'collection_archive_slug', 'gp_set_collection_slug' );
 
 /**
- * Add default template for new Posts with the Featured Image as the first block
+ * Change labels for collection post type
  */
 
 if ( ! function_exists( 'gp_selskaberne_change_collection_labels' ) ) {
@@ -239,6 +195,7 @@ function gp_after_organization_update($post) {
 }
 add_action( 'rest_after_insert_organization', 'gp_after_organization_update', 100, 1 );
 
+// Needs to be moved when event post type is created
 if ( ! function_exists( 'gp_event_listing_register_post_meta' ) ) {
     function gp_event_listing_register_post_meta() {
         register_post_meta(
