@@ -30,7 +30,7 @@ function gp_fix_post_meta($value, $post_id, $key) {
     }
 	
 	// Only check 'person_is_phone_public'.
-   if ($key == 'person_is_phone_public') {
+    if ($key == 'person_is_phone_public') {
 
         // Check if it has the right value.
         if ($value == 'Nej') {
@@ -41,7 +41,7 @@ function gp_fix_post_meta($value, $post_id, $key) {
     }
 	
 	// Only check 'person_is_email_public'.
-   if ($key == 'person_is_email_public') {
+    if ($key == 'person_is_email_public') {
 
         // Check if it has the right value.
         if ($value == 'Nej') {
@@ -51,12 +51,45 @@ function gp_fix_post_meta($value, $post_id, $key) {
         }
     }
 	// Only check 'person_address'.
-   if ($key == 'person_address') {
-			
-            $value = wp_strip_all_tags($value);
+    if ($key == 'person_address') {
+        $value = wp_strip_all_tags($value);
 
     }
-	
+    // Only check event_start_string.
+    if ($key == 'event_start_string') {
+        $value = gp_get_date_time($value);
+    }
+
+    // Only check event_end_string.
+    if ($key == 'event_end_string') {
+        $value = gp_get_date_time($value);
+    }
+    // Only check event_start_date.
+    if ($key == 'event_start_date') {
+        $value = wp_strip_all_tags($value);
+        $value = wp_date( get_option( 'date_format' ), $value );
+    }
+
+    // Only check event_end_date.
+    if ($key == 'event_end_date') {
+        $value = wp_strip_all_tags($value);
+        $value = wp_date( get_option( 'date_format' ), $value );
+
+    }
+
+    // Only check event_start_time.
+    if ($key == 'event_start_time') {
+        $value = wp_strip_all_tags($value);
+        $value = wp_date( get_option( 'time_format' ), $value );
+    }
+    
+    
+    // Only check event_end_time.
+    if ($key == 'event_end_time') {
+        $value = wp_strip_all_tags($value);
+        $value = wp_date( get_option( 'time_format' ), $value );
+    }
+
     return $value;
 
 }
@@ -91,7 +124,7 @@ function gp_get_attachment_type_test () {
     $media_url = gp_get_url_by_image_id($media_id);
     var_dump($media_url);
 }
-add_action('wp_head', 'gp_get_attachment_type_test');
+// add_action('wp_head', 'gp_get_attachment_type_test');
 
 function gp_get_attachment_type ($uuid) {
 
@@ -273,13 +306,15 @@ function gp_get_links_html ($links) {
 			
 			$link = explode(";",$link);
 
-			$html .= '<!-- wp:list-item --><li><a href="' . $link[1] . '">' . $link[0] . '</a></li><!-- /wp:list-item -->';
-
+            if($link[0]) {
+                $html .= '<!-- wp:list-item --><li><a href="' . $link[1] . '">' . $link[0] . '</a></li><!-- /wp:list-item -->';
+            }
 		}
-        $html = '<!-- wp:list --><ul>' . $html . '</ul><!-- /wp:list -->';
-        $html = '<!-- wp:heading --><h2 class="wp-block-heading">Links</h2><!-- /wp:heading -->' . $html;
-        $html = '<!-- wp:group {"layout":{"type":"constrained"}} --><div class="links wp-block-group">' . $html . '</div><!-- /wp:group -->';
-
+        if($html) {
+            $html = '<!-- wp:list --><ul>' . $html . '</ul><!-- /wp:list -->';
+            $html = '<!-- wp:heading --><h2 class="wp-block-heading">Links</h2><!-- /wp:heading -->' . $html;
+            $html = '<!-- wp:group {"layout":{"type":"constrained"}} --><div class="links wp-block-group">' . $html . '</div><!-- /wp:group -->';
+        }
     }
     return $html;
 }
