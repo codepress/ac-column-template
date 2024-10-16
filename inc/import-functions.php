@@ -82,12 +82,22 @@ function gp_fix_post_meta($value, $post_id, $key) {
         $value = wp_strip_all_tags($value);
         $value = wp_date( get_option( 'time_format' ), $value );
     }
-    
-    
     // Only check event_end_time.
     if ($key == 'event_end_time') {
         $value = wp_strip_all_tags($value);
         $value = wp_date( get_option( 'time_format' ), $value );
+    }
+    // Only check event_start_date_time.
+    if ($key == 'event_start_date_time') {
+        $value = wp_strip_all_tags($value);
+        // $value = gp_convert_timestamp($value);
+        $value = wp_date( "Y-m-d H:i:s", $value );
+    }
+    // Only check event_end_date_time.
+    if ($key == 'event_end_date_time') {
+        $value = wp_strip_all_tags($value);
+        // $value = gp_convert_timestamp($value);
+        $value = wp_date( "Y-m-d H:i:s", $value );
     }
 
     return $value;
@@ -311,9 +321,9 @@ function gp_get_links_html ($links) {
             }
 		}
         if($html) {
-            $html = '<!-- wp:list --><ul>' . $html . '</ul><!-- /wp:list -->';
-            $html = '<!-- wp:heading --><h2 class="wp-block-heading">Links</h2><!-- /wp:heading -->' . $html;
-            $html = '<!-- wp:group {"layout":{"type":"constrained"}} --><div class="links wp-block-group">' . $html . '</div><!-- /wp:group -->';
+            $html = '<!-- wp:list {"className":"is-style-no-disc","fontSize":"x-small"} --><ul class="wp-block-list is-style-no-disc has-x-small-font-size">' . $html . '</ul><!-- /wp:list -->';
+            $html = '<!-- wp:paragraph {"className":"is-label"} --><p class="is-label">Link</p><!-- /wp:paragraph -->' . $html;
+            $html = '<!-- wp:group {"metadata":{"name":"Link"},"className":"links","style":{"border":{"width":"1px"},"spacing":{"padding":{"right":"var:preset|spacing|30","left":"var:preset|spacing|30","top":"var:preset|spacing|30","bottom":"var:preset|spacing|30"},"blockGap":"var:preset|spacing|20","margin":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"}}},"borderColor":"primary","layout":{"type":"constrained"}} --><div class="wp-block-group link has-border-color has-primary-border-color" style="border-width:1px;margin-top:var(--wp--preset--spacing--40);margin-bottom:var(--wp--preset--spacing--40);padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)">' . $html . '</div><!-- /wp:group -->';
         }
     }
     return $html;
