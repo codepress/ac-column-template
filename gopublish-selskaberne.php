@@ -194,21 +194,3 @@ function gp_after_organization_update($post) {
     }
 }
 add_action( 'rest_after_insert_organization', 'gp_after_organization_update', 100, 1 );
-
-// Needs to be moved when event post type is created
-if ( ! function_exists( 'gp_event_listing_register_post_meta' ) ) {
-    function gp_event_listing_register_post_meta() {
-        register_post_meta(
-            'event_listing',
-            'event_start_date',
-            array(
-                'show_in_rest' => true,
-                'single'       => true,
-                'type'         => 'string',
-            )
-        );
-
-    }
-}
-add_action( 'init', 'gp_event_listing_register_post_meta' );
-add_action( 'rest_api_init', 'gp_event_listing_register_post_meta' );
