@@ -289,6 +289,32 @@ function gp_add_attachment_data($postID) {
 }
 add_action('pmxi_saved_post', 'gp_add_attachment_data', 10, 1);
 
+function gp_add_jobtitle_to_content($articleData, $import, $post_to_update, $current_xml_node) {
+    // Grab the content
+	// $content = $articleData['post_content'];
+    $content = isset($articleData['post_content']) ? $articleData['post_content'] : '';
+    $post_type = $articleData['post_type'];
+    if ('person' == $articleData['post_type']) {
+        ob_start(); ?>
+        <!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"core/post-meta","args":{"key":"person_function"}}}},"blockVisibility":{"controlSets":[{"id":1,"enable":true,"controls":{"metadata":{"ruleSets":[{"enable":true,"rules":[{"field":"postMetadata","subField":"person_function","operator":"notEmpty"}]}]}}}]}} -->
+        <p></p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"default"},"blockVisibility":{"controlSets":[{"id":1,"enable":true,"controls":{"metadata":{"ruleSets":[{"enable":true,"rules":[{"field":"postMetadata","subField":"person_title","operator":"notEmpty"}]}]}}}]}} -->
+        <div class="wp-block-group"><!-- wp:paragraph {"style":{"typography":{"fontStyle":"normal","fontWeight":"700"}}} -->
+        <p style="font-style:normal;font-weight:700">Professionelt virke:</p>
+        <!-- /wp:paragraph -->
+
+        <!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"core/post-meta","args":{"key":"person_title"}}}}} -->
+        <p></p>
+        <!-- /wp:paragraph --></div>
+        <!-- /wp:group -->
+        <?php $html = ob_get_clean();
+        $articleData['post_content'] = $content . $html;
+    }
+    return $articleData;
+}
+add_filter('pmxi_article_data', 'gp_add_jobtitle_to_content', 10, 4);
 
 function gp_add_links_to_content($articleData, $import, $post_to_update, $current_xml_node) {
 	// Grab the content
@@ -323,7 +349,7 @@ function gp_get_links_html ($links) {
         if($html) {
             $html = '<!-- wp:list {"className":"is-style-no-disc","fontSize":"x-small"} --><ul class="wp-block-list is-style-no-disc has-x-small-font-size">' . $html . '</ul><!-- /wp:list -->';
             $html = '<!-- wp:paragraph {"className":"is-label"} --><p class="is-label">Link</p><!-- /wp:paragraph -->' . $html;
-            $html = '<!-- wp:group {"metadata":{"name":"Link"},"className":"links","style":{"border":{"width":"1px"},"spacing":{"padding":{"right":"var:preset|spacing|30","left":"var:preset|spacing|30","top":"var:preset|spacing|30","bottom":"var:preset|spacing|30"},"blockGap":"var:preset|spacing|20","margin":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"}}},"borderColor":"primary","layout":{"type":"constrained"}} --><div class="wp-block-group link has-border-color has-primary-border-color" style="border-width:1px;margin-top:var(--wp--preset--spacing--40);margin-bottom:var(--wp--preset--spacing--40);padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)">' . $html . '</div><!-- /wp:group -->';
+            $html = '<!-- wp:group {"metadata":{"name":"Link"},"className":"links","style":{"border":{"width":"1px"},"spacing":{"padding":{"right":"var:preset|spacing|30","left":"var:preset|spacing|30","top":"var:preset|spacing|30","bottom":"var:preset|spacing|30"},"blockGap":"var:preset|spacing|20","margin":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"}}},"borderColor":"primary","layout":{"type":"default"}} --><div class="wp-block-group link has-border-color has-primary-border-color" style="border-width:1px;margin-top:var(--wp--preset--spacing--40);margin-bottom:var(--wp--preset--spacing--40);padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)">' . $html . '</div><!-- /wp:group -->';
         }
     }
     return $html;
@@ -354,11 +380,14 @@ function gp_get_document_html ($dokumenter) {
             $dokument_title = gp_get_document_thumbnail_title($dokument);
             $html .= '<!-- wp:list-item --><li><a href="' . $dokument_url . '">' . $dokument_title . '</a></li><!-- /wp:list-item -->';
         }
-        $html = '<!-- wp:list --><ul>' . $html . '</ul><!-- /wp:list -->';
-        $html = '<!-- wp:heading --><h2 class="wp-block-heading">Materialer</h2><!-- /wp:heading -->' . $html;
-        $html = '<!-- wp:group {"layout":{"type":"constrained"}} --><div class="documents wp-block-group">' . $html . '</div><!-- /wp:group -->';
-
-
+        // $html = '<!-- wp:list --><ul>' . $html . '</ul><!-- /wp:list -->';
+        // $html = '<!-- wp:heading --><h2 class="wp-block-heading">Materialer</h2><!-- /wp:heading -->' . $html;
+        // $html = '<!-- wp:group {"layout":{"type":"constrained"}} --><div class="documents wp-block-group">' . $html . '</div><!-- /wp:group -->';
+        if($html) {
+            $html = '<!-- wp:list {"className":"is-style-no-disc","fontSize":"x-small"} --><ul class="wp-block-list is-style-no-disc has-x-small-font-size">' . $html . '</ul><!-- /wp:list -->';
+            $html = '<!-- wp:paragraph {"className":"is-label"} --><p class="is-label">Dokumenter</p><!-- /wp:paragraph -->' . $html;
+            $html = '<!-- wp:group {"metadata":{"name":"Dokumenter"},"className":"links","style":{"border":{"width":"1px"},"spacing":{"padding":{"right":"var:preset|spacing|30","left":"var:preset|spacing|30","top":"var:preset|spacing|30","bottom":"var:preset|spacing|30"},"blockGap":"var:preset|spacing|20","margin":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"}}},"borderColor":"primary","layout":{"type":"default"}} --><div class="wp-block-group link has-border-color has-primary-border-color" style="border-width:1px;margin-top:var(--wp--preset--spacing--40);margin-bottom:var(--wp--preset--spacing--40);padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)">' . $html . '</div><!-- /wp:group -->';
+        }
     }
     return $html;
 }
@@ -406,6 +435,7 @@ function gp_rest_after_insert_after_import( $post_id, $xml, $is_update ) {
 	$post_type = get_post_type($post_id);
 	if ( $post_type == 'person' ) {
  		gp_set_associated_organization_status($post);
+        update_post_meta( $post_id, 'test', '$post_type' );
 	}
 }
 add_action('pmxi_saved_post', 'gp_rest_after_insert_after_import', 10, 3);

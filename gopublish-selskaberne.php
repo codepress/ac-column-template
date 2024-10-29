@@ -150,10 +150,15 @@ function gp_get_associated_organization_status($postID) {
     } else {
         return false;
     }
+    // return $specialty_bearing;
 }
 
 // Set specialty bearing status of person
 function gp_set_associated_organization_status($post) {
+    $post = get_post( $post );
+    if ( ! $post ) {
+        return false;
+    }
     $postID = $post->ID;
     // Get specialty bearing status of associated organizations
     $specialty_bearing = gp_get_associated_organization_status($postID);
@@ -161,6 +166,8 @@ function gp_set_associated_organization_status($post) {
     update_post_meta($postID, 'person_specialty_bearing', $specialty_bearing);
 }
 add_action( 'rest_after_insert_person', 'gp_set_associated_organization_status', 100, 1 );
+add_action( 'save_post_person', 'gp_set_associated_organization_status', 100, 1 );
+
 
 // set specialty bearing status of person after updating associated organizations
 function gp_after_organization_update($post) {
