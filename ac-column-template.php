@@ -8,33 +8,36 @@
  */
 
 const AC_CT_FILE = __FILE__;
+return;
+add_action(
+    'acp/v2/column_types',
+    function ($factories, AC\TableScreen $table_screen) {
+        require_once __DIR__ . '/classes/ColumnFactory/ProColumn.php';
 
-add_action('ac/v2/column_types', function ($factories, AC\TableScreen $table_screen) {
-    require_once __DIR__ . '/classes/ColumnFactory/Column.php';
+        // Example #1 - for the custom post type 'post'
+        if ((string)$table_screen->get_key() === 'post') {
+            $factories[] = AcColumnTemplate\ColumnFactory\ProColumn::class;
+        }
 
-    // Example #1 - for the custom post type 'post'
-    if ((string)$table_screen->get_key() === 'post') {
-        $factories[] = AcColumnTemplate\ColumnFactory\Column::class;
-    }
+        // Example #2 - for the custom post type 'post'
+        //    if ((string)$table_screen->get_key() === 'attachment') {
+        //        //Register Column Factory
+        //    }
 
-    // Example #2 - for the custom post type 'post'
-    //    if ((string)$table_screen->get_key() === 'attachment') {
-    //        //Register Column Factory
-    //    }
+        // Example #3 - for the custom post type 'post'
+        //    if ($table_screen instanceof AC\PostType) {
+        //        // Register Column Factory
+        //    }
 
-    // Example #3 - for the custom post type 'post'
-    //    if ($table_screen instanceof AC\PostType) {
-    //        // Register Column Factory
-    //    }
+        // Example #4 - for users
+        //    if ( ! $table_screen instanceof AC\TableScreen\User) {
+        //        // Register Column Factory
+        //    }
 
-    // Example #4 - for users
-    //    if ( ! $table_screen instanceof AC\TableScreen\User) {
-    //        // Register Column Factory
-    //    }
-
-    return $factories;
-}
-    , 10, 2
+        return $factories;
+    },
+    10,
+    2
 );
 
 // 1. Register column type
