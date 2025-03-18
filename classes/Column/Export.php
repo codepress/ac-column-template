@@ -2,19 +2,18 @@
 
 namespace AcColumnTemplate\Column;
 
-use ACP\Export\Service;
+use ACP;
 
 /**
- * Export class. Adds export functionality to the column.
+ * Editing class. Adds editing functionality to the column.
  */
-class Export implements Service
+class Export implements ACP\Export\Service
 {
 
-    public function get_value($id)
+    public function get_value($id): string
     {
-        // Return the value you would like to be exported
-        // For example:
-        return get_post_meta($id, 'my_custom_field_key', true);
+        // retrieve the value manually and format if necessary
+        return strip_tags(get_post_meta($id, 'my_custom_field_key', true));
     }
 
 }

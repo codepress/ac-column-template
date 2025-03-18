@@ -9,7 +9,7 @@ use AC\Setting\ComponentCollection;
 use AC\Setting\Config;
 use AC\Setting\FormatterCollection;
 
-class Column extends AC\Column\CustomColumnFactory
+class Column extends AC\Column\BaseColumnFactory
 {
 
     public function get_label(): string

@@ -8,15 +8,18 @@
  */
 
 const AC_CT_FILE = __FILE__;
-return;
+
 add_action(
     'acp/v2/column_types',
-    function ($factories, AC\TableScreen $table_screen) {
-        require_once __DIR__ . '/classes/ColumnFactory/ProColumn.php';
+    static function ($factories, AC\TableScreen $table_screen) {
+        // Require the necessary files for the column or use an autoloader insteead
+        require_once __DIR__ . '/classes/Column/Column.php';
+        require_once __DIR__ . '/classes/Column/Editing.php';
+        require_once __DIR__ . '/classes/Column/Export.php';
 
         // Example #1 - for the custom post type 'post'
         if ((string)$table_screen->get_key() === 'post') {
-            $factories[] = AcColumnTemplate\ColumnFactory\ProColumn::class;
+            $factories[] = AcColumnTemplate\Column\Column::class;
         }
 
         // Example #2 - for the custom post type 'post'
@@ -39,44 +42,3 @@ add_action(
     10,
     2
 );
-
-// 1. Register column type
-add_action('acp/column_types', static function (AC\ListScreen $list_screen): void {
-    // Check for version requirement
-    if (ACP()->get_version()->is_lte(new AC\Plugin\Version('6.3'))) {
-        return;
-    }
-
-    // Load necessary files
-    require_once __DIR__ . '/classes/Column/Column.php';
-    require_once __DIR__ . '/classes/Column/Editing.php';
-    require_once __DIR__ . '/classes/Column/Export.php';
-    require_once __DIR__ . '/classes/Column/Search.php';
-    require_once __DIR__ . '/classes/Column/Sorting.php';
-
-    // Make your custom column available to a specific WordPress list table:
-
-    // Example #2 - for media
-    // if ( 'attachment' === $list_screen->get_key() ) {
-    // Register column
-    // }
-
-    // Example #3 - for all post types
-    // if ( AC\MetaType::POST === $list_screen->get_meta_type() ) {
-    // Register column
-    // }
-
-    // Example #4 - for users
-    // if ( AC\MetaType::USER === $list_screen->get_meta_type() ) {
-    // Register column
-    // }
-
-    // Example #4 - for categories on the taxonomy list table
-    // if ( $list_screen instanceof ACP\ListScreen\Taxonomy && 'category' === $list_screen->get_taxonomy()) {
-    // Register column
-    // }
-
-});
-
-// 2. Optionally: load a text domain
-// load_plugin_textdomain('ac-column-template', false, __DIR__ . '/languages/');
