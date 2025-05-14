@@ -2,7 +2,7 @@
 Contributors: AUTHOR_NAME
 Tags: PLUGIN_TAGS
 Requires at least: 3.5
-Tested up to: 4.1
+Tested up to: 6.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

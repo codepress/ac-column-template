@@ -11,7 +11,7 @@ This template is for Admin Columns Pro only.
 ### Structure
 
 * `ac-column-template.php`: Main plugin file that registers the column
-* `/classes/ColumnFactory/Column.php`: Column class with all column logic
+* `/classes/Column/Column.php`: Column class with all column logic
 * `/classes/Column/Editing.php`: Example of a Editing Model (used by inline- and bulk-editing)
 * `/classes/Column/Export.php`: Example of a Export Model (used by exporting to generate a CSV)
 * `/classes/Column/Search.php`: Example of a Smart Filtering Model (makes the column filterable)
@@ -32,7 +32,7 @@ Edit the `ac-column-template.php` file to change which list table the column bel
 
 ### step 3.
 
-Edit the `Column.php` or `ProColumn.php` file and include your custom code in the appropriate functions.
+Edit the `Column.php` file and include your custom code in the appropriate functions.
 
 ### step 4 (optional).
 
