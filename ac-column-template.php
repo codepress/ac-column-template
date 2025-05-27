@@ -12,13 +12,13 @@ const AC_CT_FILE = __FILE__;
 add_action(
     'acp/v2/column_types',
     static function ($factories, AC\TableScreen $table_screen) {
-        // Require the necessary files for the column or use an autoloader insteead
+        // Require the necessary files for the column or use an autoloader instead
         require_once __DIR__ . '/classes/Column/Column.php';
         require_once __DIR__ . '/classes/Column/Editing.php';
         require_once __DIR__ . '/classes/Column/Export.php';
 
         // Example #1 - for the custom post type 'post'
-        if ((string)$table_screen->get_key() === 'post') {
+        if ((string)$table_screen->get_id() === 'post') {
             $factories[] = AcColumnTemplate\Column\Column::class;
         }
 

@@ -6,7 +6,7 @@ add_action(
         require_once __DIR__ . '/classes/ColumnFactory/ProColumn.php';
 
         // Example #1 - for the custom post type 'post'
-        if ((string)$table_screen->get_key() === 'post') {
+        if ((string)$table_screen->get_id() === 'post') {
             $factories[] = AcColumnTemplate\ColumnFactory\Column::class;
         }
 
