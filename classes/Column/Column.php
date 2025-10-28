@@ -26,23 +26,28 @@ class Column extends ACP\Column\AdvancedColumnFactory
 
     protected function get_formatters(Config $config): AC\Setting\FormatterCollection
     {
-        return new FormatterCollection([
-            new Formatter\Meta(new AC\MetaType('post'), 'my_custom_field_key'),
-        ]);
+        // Example 1: Show the custom field value for the meta key 'my_custom_field_key'
+        $formatters = [
+            new Formatter\Meta(
+                AC\MetaType::create_post_meta(), // post meta
+                'my_custom_field_key' // meta key for the custom field
+            ),
+        ];
 
         // Example 2: Same as above but written in a custom Formatter class
-        //                require_once __DIR__ . '/../Formatter/ExampleFormatter.php';
+        // require_once __DIR__ . '/../Formatter/ExampleFormatter.php';
         //
-        //                return new AC\Setting\FormatterCollection([
-        //                    new ExampleFormatter(),
-        //                ]);
+        // $formatters = [
+        //      new ExampleFormatter(),
+        // ];
 
-        // Example 3: Show the Post Type and make it linkable by using Admin Columns Formatters
-        //        return new FormatterCollection([
-        //            new Formatter\Post\PostTitle(),
-        //            new Formatter\Post\PostLink('edit_post'),
-        //        ]);
+        // Example 3: Shows the Title (of the post) and wraps it in an edit post link
+        // $formatters = [
+        //     new Formatter\Post\PostTitle(),
+        //     new Formatter\Post\PostLink('edit_post'),
+        // ];
 
+        return new FormatterCollection($formatters);
     }
 
     /**
