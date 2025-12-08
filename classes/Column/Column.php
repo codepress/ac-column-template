@@ -133,7 +133,7 @@ class Column extends ACP\Column\AdvancedColumnFactory
     }
 
     // Omit if you want the default export which should be fine for most cases
-    protected function get_export(Config $config): ?ACP\Export\Service
+    protected function get_export(Config $config): ?AC\Setting\Formatter
     {
         /**
          * Example #1 - A custom export model
@@ -142,15 +142,15 @@ class Column extends ACP\Column\AdvancedColumnFactory
 
         /**
          * Example #2 - Export a custom field value
-         * @see ACP\Export\Model\Post\Meta
-         * @see ACP\Export\Model\User\Meta
-         * @see ACP\Export\Model\Term\Meta
-         * @see ACP\Export\Model\Comment\Meta
+         * @see AC\Value\Formatter\Post\Meta
+         * @see AC\Value\Formatter\User\Meta
+         * @see AC\Value\Formatter\Term\Meta
+         * @see AC\Value\Formatter\Comment\Meta
          */
-        // return new ACP\Export\Model\Post\Meta('my_custom_field_key');
-        // return new ACP\Export\Model\User\Meta('my_custom_field_key');
-        // return new ACP\Export\Model\Meta\Meta('my_custom_field_key');
-        // return new ACP\Export\Model\Comment\Meta('my_custom_field_key');
+        // return new AC\Value\Formatter\Post\Meta('my_custom_field_key');
+        // return new AC\Value\Formatter\User\Meta('my_custom_field_key');
+        // return new AC\Value\Formatter\Term\Meta('my_custom_field_key');
+        // return new AC\Value\Formatter\Comment\Meta('my_custom_field_key');
     }
 
 }
