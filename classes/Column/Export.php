@@ -2,21 +2,30 @@
 
 namespace AcColumnTemplate\Column;
 
-use ACP;
+use AC\Setting\Formatter;
+use AC\Type\Value;
 
 /**
- * Editing class. Adds editing functionality to the column.
+ * Export class. Adds export functionality to the column.
  */
-class Export implements ACP\Export\Service
+class Export implements Formatter
 {
 
-    public function get_value($id): string
+    public function format(Value $value)
     {
+        // Post ID
+        $id = $value->get_id();
+
         // retrieve the value...
-        $value = get_post_meta($id, 'my_custom_field_key', true);
+        $meta_value = get_post_meta($id, 'my_custom_field_key', true);
 
         // ...and format if necessary
-        return strip_tags($value);
+        $meta_value = strip_tags($meta_value);
+
+        // return the formatted value within the Value object
+        return $value->with_value(
+            $meta_value
+        );
     }
 
 }
