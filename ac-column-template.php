@@ -37,6 +37,7 @@ function acp_my_custom_column(array $factories, AC\TableScreen $table_screen)
         case $table_screen instanceof AC\TableScreen\Media:
         case $table_screen instanceof ACP\TableScreen\Taxonomy:
             // Register Column Factory
+            //$factories[] = AcColumnTemplate\Column\Column::class;
             break;
     }
 

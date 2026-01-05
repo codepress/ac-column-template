@@ -12,10 +12,12 @@ class ExampleFormatter implements AC\Setting\Formatter
 
     public function format(Value $value)
     {
-        $post_id = $value->get_id();
+        $post_id = (int)$value->get_id();
         $meta_value = get_post_meta($post_id, 'my_custom_field_key', true);
 
-        return $value->with_value("<a href='" . get_edit_post_link($value->get_id()) . "'>$meta_value</a>");
+        $html = "<a href='" . get_edit_post_link($value->get_id()) . "'>$meta_value</a>";
+
+        return $value->with_value($html);
     }
 
 }

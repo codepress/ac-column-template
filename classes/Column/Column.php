@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace AcColumnTemplate\Column;
 
 use AC;
-use AC\Setting\Config;
-use AC\Setting\FormatterCollection;
-use AC\Value\Formatter;
 use ACP;
 
 class Column extends ACP\Column\AdvancedColumnFactory
@@ -24,11 +21,11 @@ class Column extends ACP\Column\AdvancedColumnFactory
         return 'ac-COLUMN_NAME';
     }
 
-    protected function get_formatters(Config $config): AC\Setting\FormatterCollection
+    protected function get_formatters(AC\Setting\Config $config): AC\Setting\FormatterCollection
     {
         // Example 1: Show the custom field value for the meta key 'my_custom_field_key'
         $formatters = [
-            new Formatter\Meta(
+            new AC\Value\Formatter\Meta(
                 AC\MetaType::create_post_meta(), // post meta
                 'my_custom_field_key' // meta key for the custom field
             ),
@@ -47,7 +44,7 @@ class Column extends ACP\Column\AdvancedColumnFactory
         //     new Formatter\Post\PostLink('edit_post'),
         // ];
 
-        return new FormatterCollection($formatters);
+        return new AC\Setting\FormatterCollection($formatters);
     }
 
     /**
@@ -55,7 +52,7 @@ class Column extends ACP\Column\AdvancedColumnFactory
      * @link https://docs.admincolumns.com/article/27-how-to-use-inline-editing
      * @link https://docs.admincolumns.com/article/67-how-to-use-bulk-editing
      */
-    protected function get_editing(Config $config): ?ACP\Editing\Service
+    protected function get_editing(AC\Setting\Config $config): ?ACP\Editing\Service
     {
         /**
          * Example #1 - A custom editing service. Create your own input field and set how you want your data to be saved
@@ -70,7 +67,10 @@ class Column extends ACP\Column\AdvancedColumnFactory
         // return new ACP\Editing\Service\Post\Meta('my_custom_field_key', new ACP\Editing\View\Text());
     }
 
-    protected function get_search(Config $config): ?ACP\Search\Comparison
+    /**
+     * You will find all available search models in this plugin folder: `admin-columns-pro/classes/Search/Comparison`.
+     */
+    protected function get_search(AC\Setting\Config $config): ?ACP\Search\Comparison
     {
         /**
          * Example #1 - A custom filtering model
@@ -101,7 +101,10 @@ class Column extends ACP\Column\AdvancedColumnFactory
          */
     }
 
-    protected function get_sorting(Config $config): ?ACP\Sorting\Model\QueryBindings
+    /**
+     * You will find all available sorting models in this plugin folder: `admin-columns-pro/classes/Sorting/Model`.
+     */
+    protected function get_sorting(AC\Setting\Config $config): ?ACP\Sorting\Model\QueryBindings
     {
         /**
          * Example #1 - Write your own custom sorting query using this model
@@ -127,18 +130,19 @@ class Column extends ACP\Column\AdvancedColumnFactory
          * @see ACP\Sorting\Model\Post\MetaFormat
          */
         // return new ACP\Sorting\Model\Post\MetaFormat( new ACP\Sorting\FormatValue\PostTitle(), 'my_custom_field_key' );
-        /**
-         * You will find all available sorting models in this plugin folder: `admin-columns-pro/classes/Sorting/Model`.
-         */
     }
 
-    // Omit if you want the default export which should be fine for most cases
-    protected function get_export(Config $config): ?AC\Setting\Formatter
+    /**
+     * Omit if you want the default export which should be fine for most cases
+     */
+    protected function get_export(AC\Setting\Config $config): ?AC\Setting\FormatterCollection
     {
         /**
-         * Example #1 - A custom export model
+         * Example #1 - A custom export formatter
          */
-        return new Export();
+        $formatters = [
+            new Export(),
+        ];
 
         /**
          * Example #2 - Export a custom field value
@@ -147,10 +151,13 @@ class Column extends ACP\Column\AdvancedColumnFactory
          * @see AC\Value\Formatter\Term\Meta
          * @see AC\Value\Formatter\Comment\Meta
          */
-        // return new AC\Value\Formatter\Post\Meta('my_custom_field_key');
-        // return new AC\Value\Formatter\User\Meta('my_custom_field_key');
-        // return new AC\Value\Formatter\Term\Meta('my_custom_field_key');
-        // return new AC\Value\Formatter\Comment\Meta('my_custom_field_key');
+        // $formatters[] = new AC\Value\Formatter\Post\Meta('my_custom_field_key');
+        // $formatters[] = new AC\Value\Formatter\User\Meta('my_custom_field_key');
+        // $formatters[] = new AC\Value\Formatter\Term\Meta('my_custom_field_key');
+        // $formatters[] = new AC\Value\Formatter\Comment\Meta('my_custom_field_key');
+
+        // Always place the formatter(s) into a FormatterCollection
+        return new AC\Setting\FormatterCollection($formatters);
     }
 
 }
