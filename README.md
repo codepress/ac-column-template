@@ -16,8 +16,6 @@ This template is for Admin Columns Pro only.
 * `/classes/Column/Export.php`: Example of a Export Model (used by exporting to generate a CSV)
 * `/classes/Column/Search.php`: Example of a Smart Filtering Model (makes the column filterable)
 * `/classes/Column/Sorting.php`: Example of a Sorting Model (makes the column sortable)
-* `/css`: folder for .css files
-* `/js`:  folder for .js files
 * `/languages`: folder for .pot, .po and .mo files
 * `readme.txt`: WordPress readme file to be used by the WordPress repository
 

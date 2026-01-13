@@ -2,6 +2,7 @@
 
 namespace AcColumnTemplate\Column;
 
+use ACP;
 use ACP\Query\Bindings;
 use ACP\Sorting\Model\QueryBindings;
 use ACP\Sorting\Model\SqlOrderByFactory;
@@ -46,10 +47,10 @@ class Sorting implements QueryBindings
 
         /**
          * The created Query Bindings will be parsed into SQL by one of these services:
-         * @see \ACP\Query\Post     This service injects the SQL bindings into `WP_Query`
-         * @see \ACP\Query\User     This service injects the SQL bindings into `WP_User_Query`
-         * @see \ACP\Query\Term     This service injects the SQL bindings into `WP_Term_Query`
-         * @see \ACP\Query\Comment  This service injects the SQL bindings into `WP_Comment_Query`
+         * @see ACP\Query\Type\Post     This service injects the SQL bindings into `WP_Query`
+         * @see ACP\Query\Type\User     This service injects the SQL bindings into `WP_User_Query`
+         * @see ACP\Query\Type\Term     This service injects the SQL bindings into `WP_Term_Query`
+         * @see ACP\Query\Type\Comment  This service injects the SQL bindings into `WP_Comment_Query`
          */
         return $bindings;
     }

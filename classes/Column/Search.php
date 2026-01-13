@@ -62,20 +62,25 @@ class Search extends Comparison
 
         /**
          * Example #2 - altering the query with custom SQL
-         * @see Query\Post This service handler parses the SQL bindings into `WP_Query`
+         * @see Query\Type\Post This service handler parses the SQL bindings into `WP_Query`
          * @see WP_Query::get_posts This object runs the SQL query
          */
         global $wpdb;
 
         // 1. You can 'JOIN' tables together like so:
+
+        // Create a unique alias for this join statement e.g. 'filter_ac1'.
+        // If you have multiple filters applied, this will quarantee an unique alias for every JOIN statement.
+        $alias = $binding->get_unique_alias('filter');
+
         $binding->join(
-            "INNER JOIN $wpdb->postmeta AS ac_filter ON $wpdb->posts.ID = ac_filter.post_id 
-                AND ac_filter.meta_key = 'my_custom_field_key'"
+            "INNER JOIN $wpdb->postmeta AS $alias ON $wpdb->posts.ID = $alias.post_id 
+                AND $alias.meta_key = 'my_custom_field_key'"
         );
 
         // 2. Create the `WHERE` clause. Use the `ComparisonFactory` to create a where-statement by operator (equal, contains etc.)
         $where = ComparisonFactory::create(
-            'ac_filter.meta_value',
+            $alias . '.meta_value', // prefix with the `filter_ac1` alias we used in the JOIN statement
             $operator,
             $value
         )->prepare();
@@ -84,10 +89,10 @@ class Search extends Comparison
 
         /**
          * The created Query Bindings will be parsed into SQL by one of these services:
-         * @see \ACP\Query\Post This service injects the SQL bindings into `WP_Query`
-         * @see \ACP\Query\User This service injects the SQL bindings into `WP_User_Query`
-         * @see \ACP\Query\Term This service injects the SQL bindings into `WP_Term_Query`
-         * @see \ACP\Query\Comment This service injects the SQL bindings into `WP_Comment_Query`
+         * @see ACP\Query\Type\Post     This service injects the SQL bindings into `WP_Query`
+         * @see ACP\Query\Type\User     This service injects the SQL bindings into `WP_User_Query`
+         * @see ACP\Query\Type\Term     This service injects the SQL bindings into `WP_Term_Query`
+         * @see ACP\Query\Type\Comment  This service injects the SQL bindings into `WP_Comment_Query`
          */
         return $binding;
     }
