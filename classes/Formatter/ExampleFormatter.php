@@ -7,7 +7,7 @@ namespace AcColumnTemplate\Formatter;
 use AC;
 use AC\Type\Value;
 
-class ExampleFormatter implements AC\Setting\Formatter
+class ExampleFormatter implements AC\Formatter
 {
 
     public function format(Value $value)

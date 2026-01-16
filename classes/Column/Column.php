@@ -21,11 +21,11 @@ class Column extends ACP\Column\AdvancedColumnFactory
         return 'ac-COLUMN_NAME';
     }
 
-    protected function get_formatters(AC\Setting\Config $config): AC\Setting\FormatterCollection
+    protected function get_formatters(AC\Setting\Config $config): AC\FormatterCollection
     {
         // Example 1: Show the custom field value for the meta key 'my_custom_field_key'
         $formatters = [
-            new AC\Value\Formatter\Meta(
+            new AC\Formatter\Meta(
                 AC\MetaType::create_post_meta(), // post meta
                 'my_custom_field_key' // meta key for the custom field
             ),
@@ -44,7 +44,7 @@ class Column extends ACP\Column\AdvancedColumnFactory
         //     new Formatter\Post\PostLink('edit_post'),
         // ];
 
-        return new AC\Setting\FormatterCollection($formatters);
+        return new AC\FormatterCollection($formatters);
     }
 
     /**
@@ -135,7 +135,7 @@ class Column extends ACP\Column\AdvancedColumnFactory
     /**
      * Omit if you want the default export which should be fine for most cases
      */
-    protected function get_export(AC\Setting\Config $config): ?AC\Setting\FormatterCollection
+    protected function get_export(AC\Setting\Config $config): ?AC\FormatterCollection
     {
         /**
          * Example #1 - A custom export formatter
@@ -146,10 +146,10 @@ class Column extends ACP\Column\AdvancedColumnFactory
 
         /**
          * Example #2 - Export a custom field value
-         * @see AC\Value\Formatter\Post\Meta
-         * @see AC\Value\Formatter\User\Meta
-         * @see AC\Value\Formatter\Term\Meta
-         * @see AC\Value\Formatter\Comment\Meta
+         * @see AC\Formatter\Post\Meta
+         * @see AC\Formatter\User\Meta
+         * @see AC\Formatter\Term\Meta
+         * @see AC\Formatter\Comment\Meta
          */
         // $formatters[] = new AC\Value\Formatter\Post\Meta('my_custom_field_key');
         // $formatters[] = new AC\Value\Formatter\User\Meta('my_custom_field_key');
@@ -157,7 +157,7 @@ class Column extends ACP\Column\AdvancedColumnFactory
         // $formatters[] = new AC\Value\Formatter\Comment\Meta('my_custom_field_key');
 
         // Always place the formatter(s) into a FormatterCollection
-        return new AC\Setting\FormatterCollection($formatters);
+        return new AC\FormatterCollection($formatters);
     }
 
 }

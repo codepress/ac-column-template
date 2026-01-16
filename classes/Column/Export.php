@@ -2,7 +2,7 @@
 
 namespace AcColumnTemplate\Column;
 
-use AC\Setting\Formatter;
+use AC\Formatter;
 use AC\Type\Value;
 
 /**
