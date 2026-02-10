@@ -9,7 +9,7 @@
 
 const AC_CT_FILE = __FILE__;
 
-add_filter('ac/column/types/pro', 'acp_my_custom_column', 10, 2);
+add_filter('ac/column/types', 'acp_my_custom_column', 10, 2);
 
 function acp_my_custom_column(array $factories, AC\TableScreen $table_screen)
 {
@@ -28,6 +28,7 @@ function acp_my_custom_column(array $factories, AC\TableScreen $table_screen)
     // Example #2 - for the custom post type 'page'
     if ('page' === (string)$table_screen->get_id()) {
         // Register Column Factory
+        // $factories[] = AcColumnTemplate\Column\Column::class;
     }
 
     // Example #3 - Check for different table screens based on instance type
@@ -37,7 +38,7 @@ function acp_my_custom_column(array $factories, AC\TableScreen $table_screen)
         case $table_screen instanceof AC\TableScreen\Media:
         case $table_screen instanceof ACP\TableScreen\Taxonomy:
             // Register Column Factory
-            //$factories[] = AcColumnTemplate\Column\Column::class;
+            // $factories[] = AcColumnTemplate\Column\Column::class;
             break;
     }
 
