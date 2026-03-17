@@ -1,3 +1,11 @@
 # OS X
 .DS_Store
 .idea
+/.claude
+
+# Ignore everything in root except specific files
+/*
+!/.gitignore
+!/readme.txt
+!/README.md
+!/ac-column-template.php

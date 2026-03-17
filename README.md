@@ -1,41 +1,175 @@
-# Admin Columns - Column Template
+# Admin Columns — Column Template
 
-Welcome to the Admin Columns Pro column template repository.
-Here you will find a starter-kit for creating a new column for Admin Columns Pro. This starter-kit will work as a normal WP plugin.
+A starter-kit plugin for creating custom column types for **Admin Columns Pro**. Copy, customise, and activate — no build step required.
 
-For more information about creating a new column type, please read the following article:
-https://docs.admincolumns.com/article/21-how-to-create-my-own-column
+> **Requires**: Admin Columns Pro (not the free Admin Columns plugin)
 
-This template is for Admin Columns Pro only.
+---
 
-### Structure
+## Quick Start
 
-* `ac-column-template.php`: Main plugin file that registers the column
-* `/classes/Column/Column.php`: Column class with all column logic
-* `/classes/Column/Editing.php`: Example of a Editing Model (used by inline- and bulk-editing)
-* `/classes/Column/Export.php`: Example of a Export Model (used by exporting to generate a CSV)
-* `/classes/Column/Search.php`: Example of a Smart Filtering Model (makes the column filterable)
-* `/classes/Column/Sorting.php`: Example of a Sorting Model (makes the column sortable)
-* `/languages`: folder for .pot, .po and .mo files
-* `readme.txt`: WordPress readme file to be used by the WordPress repository
+1. Copy this folder into `wp-content/plugins/`
+2. Find-and-replace both placeholders across **all files** (see [Placeholder Reference](#placeholder-reference))
+3. Edit `ac-column-template.php` to target the right table screen (see [Targeting a Table Screen](#targeting-a-table-screen))
+4. Edit `classes/Column/Column.php` — replace the meta key in `get_formatters()` with your own (see [Displaying a Value](#displaying-a-value))
+5. Activate the plugin in WordPress and add your column in the Admin Columns settings
 
-### step 1.
+---
 
-This template uses two placeholders. Use the following list to do a 'find and replace' on them:
+## Placeholder Reference
 
-* `COLUMN_NAME`: Single-word, no spaces. Underscores allowed. eg. my-custom-column-name
-* `COLUMN_LABEL`: Multiple words, can include spaces, visible when selecting a column
+Two placeholders appear throughout the files — replace both everywhere before activating:
 
-### step 2.
+| Placeholder | What it becomes | Example |
+|---|---|---|
+| `COLUMN_NAME` | Machine identifier — lowercase, hyphens OK | `my-score` |
+| `COLUMN_LABEL` | Human-readable label shown in the column picker | `My Score` |
 
-Edit the `ac-column-template.php` file to change which list table the column belongs too.
+Run a find-and-replace across **all files in the folder**, not just `Column.php`. Both placeholders appear in the main plugin file, `Column.php`, and the plugin header comment.
 
-### step 3.
+---
 
-Edit the `Column.php` file and include your custom code in the appropriate functions.
+## Targeting a Table Screen
 
-### step 4 (optional).
+`ac-column-template.php` hooks into `ac/column/types`. The filter receives `$factories` (array of factory class names) and `$table_screen` (the current list table). Use `$table_screen` to decide when to register your column:
 
-The structure of this plugin is prepared so that it can contain multiple columns.
-If you want to create multiple custom columns in this plugin, you can create a copy of the 'Column' folder and use a 
-different folder name. Then make sure to `require` the copied files in the main plugin file.
+```php
+// Any post type (posts, pages, custom post types)
+if ($table_screen instanceof AC\PostType) {
+    $factories[] = AcColumnTemplate\Column\Column::class;
+}
+
+// Specific post type only
+if ('page' === (string)$table_screen->get_id()) {
+    $factories[] = AcColumnTemplate\Column\Column::class;
+}
+
+// Multiple screen types at once
+switch (true) {
+    case $table_screen instanceof AC\TableScreen\Post:
+    case $table_screen instanceof AC\TableScreen\User:
+    case $table_screen instanceof AC\TableScreen\Media:
+    case $table_screen instanceof ACP\TableScreen\Taxonomy:
+        $factories[] = AcColumnTemplate\Column\Column::class;
+        break;
+}
+```
+
+Available table screen classes: `AC\TableScreen\Post`, `AC\TableScreen\User`, `AC\TableScreen\Media`, `ACP\TableScreen\Taxonomy`.
+
+---
+
+## Displaying a Value
+
+`get_formatters()` in `Column.php` is the **only method you must implement**. It returns an `AC\FormatterCollection` that reads and formats the cell value.
+
+The simplest case — display a custom field:
+
+```php
+protected function get_formatters(AC\Setting\Config $config): AC\FormatterCollection
+{
+    return new AC\FormatterCollection([
+        new AC\Formatter\Meta(
+            AC\MetaType::create_post_meta(),
+            'my_custom_field_key'
+        ),
+    ]);
+}
+```
+
+For a custom formatter, copy `classes/Formatter/ExampleFormatter.php` and implement `format(Value $value): Value`. Return `$value->with_value($new_value)`, or throw `AC\Exception\ValueNotFoundException::from_id($value->get_id())` to render an empty cell.
+
+The other methods — `get_editing()`, `get_search()`, `get_sorting()`, `get_export()` — all **return `null` by default** if you remove them. They are entirely optional.
+
+---
+
+## Optional Features
+
+Each feature is a separate class. Enable a feature by returning an instance from the corresponding method in `Column.php`, or remove the method to disable it.
+
+### Inline & Bulk Editing — `Editing.php`
+
+Implements `ACP\Editing\Service`. Three methods:
+
+- `get_value(int $id)` — current value to pre-fill the input
+- `get_view(string $context): ?View` — input type (`'single'` = inline, `'bulk'` = bulk edit)
+- `update(int $id, $data): void` — saves the submitted value
+
+```php
+// Editing.php (custom class)
+return new Editing();
+
+// Or use a built-in service — no custom class needed:
+return new ACP\Editing\Service\Post\Meta('my_custom_field_key', new ACP\Editing\View\Text());
+```
+
+Available `View` types: `Text`, `TextArea`, `Number`, `Select`, `Image`, `Url`, `Email`, `Wysiwyg`, `Toggle`, `Media`, `Date`, `DateTime`, `Color`, `CheckboxList`, `AjaxSelect`.
+
+### Smart Filtering — `Search.php`
+
+Extends `ACP\Search\Comparison`. The constructor declares allowed operators and value type. `create_query_bindings()` builds the SQL via `$binding->meta_query([...])` (delegates to `WP_Meta_Query`) or raw `$binding->join()` + `$binding->where()`.
+
+```php
+// Search.php (custom class)
+return new Search();
+
+// Or use a built-in comparison — no custom class needed:
+return new ACP\Search\Comparison\Meta\Text('my_custom_field_key');
+return new ACP\Search\Comparison\Meta\Number('my_custom_field_key');
+```
+
+Other built-ins: `Meta\Image`, `Meta\Toggle`, `Meta\Date`, `Meta\DateTime\Timestamp`, `Meta\Select`, `Meta\Decimal`, `Meta\User`, `Meta\Post`.
+
+### Sorting — `Sorting.php`
+
+Implements `ACP\Sorting\Model\QueryBindings`. `create_query_bindings(Order $order)` adds a JOIN and ORDER BY to the query. Use `SqlOrderByFactory::create()` to push empty values to the bottom automatically.
+
+```php
+// Sorting.php (custom class)
+return new Sorting();
+
+// Or use a built-in model — no custom class needed:
+return new ACP\Sorting\Model\Post\Meta('my_custom_field_key');
+```
+
+### CSV Export — `Export.php`
+
+Implements `AC\Formatter`. Works like a display formatter but targets CSV output. Omit `get_export()` entirely if the display formatter output is already suitable for export — the default falls back to it automatically.
+
+```php
+// Export.php (custom class)
+return new AC\FormatterCollection([new Export()]);
+```
+
+---
+
+## Multiple Columns in One Plugin
+
+1. Duplicate the `classes/Column/` folder and give it a new name (e.g. `classes/SecondColumn/`)
+2. Update the `namespace` declaration in each copied file
+3. Add `require_once` lines for the new files in `ac-column-template.php`
+4. Register the new factory class in the same `ac/column/types` filter function
+
+---
+
+## Troubleshooting
+
+**Column not appearing in the column picker**
+- Check that the `$table_screen` condition in `ac-column-template.php` matches the list table you are viewing
+- Confirm both placeholders (`COLUMN_NAME`, `COLUMN_LABEL`) have been replaced in all files
+- Ensure the plugin is activated
+
+**Column cell shows nothing**
+- Verify the meta key in `get_formatters()` matches the actual key stored in the database
+- Confirm the post (or user/term) actually has a value saved for that meta key
+
+**Inline edit not saving**
+- Check that `update()` in `Editing.php` uses the correct meta key and the right function (`update_post_meta`, `update_user_meta`, etc.) for your object type
+
+---
+
+## Further Reading
+
+- [How to create a custom column](https://docs.admincolumns.com/article/21-how-to-create-my-own-column)
+- [Inline editing docs](https://docs.admincolumns.com/article/27-how-to-use-inline-editing)
+- [Bulk editing docs](https://docs.admincolumns.com/article/67-how-to-use-bulk-editing)
