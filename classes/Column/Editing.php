@@ -1,29 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcColumnTemplate\Column;
 
 use ACP;
 use ACP\Editing\View;
 
 /**
- * Editing class. Adds editing functionality to the column.
+ * Editing class. Adds inline and bulk editing to the column.
  */
 class Editing implements ACP\Editing\Service
 {
 
     public function get_value(int $id)
     {
-        // Retrieve the value for editing. This value will be displayed in the input field.
-        // For example:
-        return get_post_meta($id, 'my_custom_field_key', true);
+        return get_post_meta($id, 'price', true);
     }
 
     /**
-     * Set the type of input field you want to use e.g. 'text', 'number', 'select' etc.
-     *
-     * @param string $context 'single' (for inline edit) or 'bulk' (for bulk editing)
-     *
-     * @return View|null
+     * @param string $context 'single' (inline edit) or 'bulk' (bulk edit)
      */
     public function get_view(string $context): ?View
     {
@@ -50,33 +46,26 @@ class Editing implements ACP\Editing\Service
          * @see View\Audio
          * @see View\Video
          */
-        $view = new View\Text();
+        return new View\Number();
 
         // Example of a dropdown select:
-        // $view = new View\Select([1 => 'Option #1', 2 => 'Option #2']);
+        // return new View\Select([1 => 'Option #1', 2 => 'Option #2']);
 
-        // (Optional) use View specific modifiers
-        //$view->set_clear_button( true );
-        //$view->set_placeholder( 'Custom placeholder' );
-        //$view->set_required( true );
-
-        // (Optional) return a different view or disable editing based on context: 'bulk' or 'single' (index)
-        // return $context === 'bulk' ? $view : null;
-
-        return $view;
+        // (Optional) return a different view or disable editing based on context:
+        // return $context === 'bulk' ? new View\Number() : null;
     }
 
-    /**
-     * Saves the value after using inline or bulk-edit
-     *
-     * @param int   $id   Object ID
-     * @param mixed $data Value to be saved
-     */
     public function update(int $id, $data): void
     {
-        // Store the value that has been entered with inline or bulk-edit
-        // For example:
-        update_post_meta($id, 'my_custom_field_key', $data);
+        $price = filter_var($data, FILTER_VALIDATE_FLOAT);
+
+        if (false === $price) {
+            delete_post_meta($id, 'price');
+
+            return;
+        }
+
+        update_post_meta($id, 'price', $price);
     }
 
 }

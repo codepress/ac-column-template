@@ -58,6 +58,8 @@ switch (true) {
 
 Available table screen classes: `AC\TableScreen\Post`, `AC\TableScreen\User`, `AC\TableScreen\Media`, `ACP\TableScreen\Taxonomy`.
 
+> **Note:** `AC\PostType` (used in example 1) is an interface satisfied by all post-type screens — posts, pages, and custom post types. `AC\TableScreen\Post` implements that interface and represents the same screens. Use the `switch` pattern when you need to combine post screens with non-post screens like `User` or `Taxonomy` in one condition.
+
 ---
 
 ## Displaying a Value
@@ -143,11 +145,16 @@ return new ACP\Sorting\Model\Post\Meta('my_custom_field_key');
 
 ### CSV Export — `Export.php`
 
-Implements `AC\Formatter`. Works like a display formatter but targets CSV output. Omit `get_export()` entirely if the display formatter output is already suitable for export — the default falls back to it automatically.
+Implements `AC\Formatter`. Works like a display formatter but targets CSV output. If your display formatter already produces plain text, you can omit `get_export()` entirely — Admin Columns falls back to it automatically. To export raw meta without a custom class, reuse `AC\Formatter\Meta` directly:
 
 ```php
 // Export.php (custom class)
 return new AC\FormatterCollection([new Export()]);
+
+// Or reuse the display formatter built-in — no custom class needed:
+return new AC\FormatterCollection([
+    new AC\Formatter\Meta(AC\MetaType::create_post_meta(), 'my_custom_field_key'),
+]);
 ```
 
 ---

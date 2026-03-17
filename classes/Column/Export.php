@@ -1,31 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcColumnTemplate\Column;
 
+use AC\Exception\ValueNotFoundException;
 use AC\Formatter;
 use AC\Type\Value;
 
 /**
- * Export class. Adds export functionality to the column.
+ * Export formatter. Returns a plain-text value suitable for CSV export.
+ * For display formatting (with HTML), see ExampleFormatter.
  */
 class Export implements Formatter
 {
 
-    public function format(Value $value)
+    public function format(Value $value): Value
     {
-        // Post ID
-        $id = $value->get_id();
+        $post_id = (int)$value->get_id();
 
-        // retrieve the value...
-        $meta_value = get_post_meta($id, 'my_custom_field_key', true);
+        $price = get_post_meta($post_id, 'price', true);
 
-        // ...and format if necessary
-        $meta_value = strip_tags($meta_value);
+        // Throw when there is nothing to export — the cell is left empty.
+        if ('' === $price || false === $price) {
+            throw ValueNotFoundException::from_id($value->get_id());
+        }
 
-        // return the formatted value within the Value object
-        return $value->with_value(
-            $meta_value
-        );
+        // Plain text — no HTML, no links. Export targets CSV, not the browser.
+        return $value->with_value('$' . number_format((float)$price, 2));
     }
 
 }

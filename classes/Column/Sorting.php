@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcColumnTemplate\Column;
 
-use ACP;
 use ACP\Query\Bindings;
 use ACP\Sorting\Model\QueryBindings;
 use ACP\Sorting\Model\SqlOrderByFactory;
@@ -18,39 +19,28 @@ class Sorting implements QueryBindings
     {
         global $wpdb;
 
-        /**
-         * @see Bindings This object holds the SQL statements e.g. 'join, where, order by, group by'
-         */
         $bindings = new Bindings();
 
-        // 1. You can 'JOIN' tables together like so:
         $bindings->join(
             "LEFT JOIN $wpdb->postmeta AS ac_sort ON $wpdb->posts.ID = ac_sort.post_id
-                AND ac_sort.meta_key = 'my_custom_field_key'"
+                AND ac_sort.meta_key = 'price'"
         );
 
-        // 2. Set the 'ORDER BY' statement:
+        // SqlOrderByFactory pushes empty values to the bottom regardless of sort direction.
+        // Use a raw "$column $order" string instead if you want standard ASC/DESC behavior.
         $bindings->order_by(
-            "ac_sort.meta_value " . $order
+            SqlOrderByFactory::create('ac_sort.meta_value', (string)$order)
         );
 
-        // 2. Optionally: if you want your empty results at the bottom, you can
-        // use this factory which will create the correct 'ORDER BY' statement for you
-        $bindings->order_by(
-            SqlOrderByFactory::create("ac_sort.meta_value", $order)
-        );
-
-        // 3. Optionally: set the 'GROUP BY' to groups the results
-        $bindings->group_by(
-            "$wpdb->posts.ID"
-        );
+        // (Optional) GROUP BY to deduplicate rows when the JOIN can produce multiples.
+        // $bindings->group_by("$wpdb->posts.ID");
 
         /**
          * The created Query Bindings will be parsed into SQL by one of these services:
-         * @see ACP\Query\Type\Post     This service injects the SQL bindings into `WP_Query`
-         * @see ACP\Query\Type\User     This service injects the SQL bindings into `WP_User_Query`
-         * @see ACP\Query\Type\Term     This service injects the SQL bindings into `WP_Term_Query`
-         * @see ACP\Query\Type\Comment  This service injects the SQL bindings into `WP_Comment_Query`
+         * @see ACP\Query\Type\Post     Injects bindings into WP_Query
+         * @see ACP\Query\Type\User     Injects bindings into WP_User_Query
+         * @see ACP\Query\Type\Term     Injects bindings into WP_Term_Query
+         * @see ACP\Query\Type\Comment  Injects bindings into WP_Comment_Query
          */
         return $bindings;
     }
