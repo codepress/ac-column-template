@@ -9,10 +9,11 @@ A starter-kit plugin for creating custom column types for **Admin Columns Pro**.
 ## Quick Start
 
 1. Copy this folder into `wp-content/plugins/`
-2. Find-and-replace both placeholders across **all files** (see [Placeholder Reference](#placeholder-reference))
-3. Edit `ac-column-template.php` to target the right table screen (see [Targeting a Table Screen](#targeting-a-table-screen))
-4. Edit `classes/Column/Column.php` — replace the meta key in `get_formatters()` with your own (see [Displaying a Value](#displaying-a-value))
-5. Activate the plugin in WordPress and add your column in the Admin Columns settings
+2. Rename the folder, the main plugin file, and the function `acp_my_custom_column` in `ac-column-template.php` to something unique to avoid conflicts if two plugins based on this template are active at once (e.g. `my-score-column/`, `my-score-column.php`, `my_score_column`)
+3. Find-and-replace both placeholders across **all files** (see [Placeholder Reference](#placeholder-reference))
+4. Edit `ac-column-template.php` to target the right table screen (see [Targeting a Table Screen](#targeting-a-table-screen))
+5. Edit `classes/Column/Column.php` — replace the meta key in `get_formatters()` with your own (see [Displaying a Value](#displaying-a-value))
+6. Activate the plugin in WordPress and add your column in the Admin Columns settings
 
 ---
 
@@ -77,15 +78,23 @@ protected function get_formatters(AC\Setting\Config $config): AC\FormatterCollec
 }
 ```
 
-For a custom formatter, copy `classes/Formatter/ExampleFormatter.php` and implement `format(Value $value): Value`. Return `$value->with_value($new_value)`, or throw `AC\Exception\ValueNotFoundException::from_id($value->get_id())` to render an empty cell.
+For a custom formatter, copy `classes/Formatter/ExampleFormatter.php` and implement `format(Value $value): Value`. Return `$value->with_value($new_value)`, or throw `AC\Exception\ValueNotFoundException::from_id($value->get_id())` to render an empty cell. `ExampleFormatter` reads a meta key, resolves a related post title, and renders it as a link with a fallback — use it as a starting point when a built-in formatter can't produce the output you need.
 
-The other methods — `get_editing()`, `get_search()`, `get_sorting()`, `get_export()` — all **return `null` by default** if you remove them. They are entirely optional.
+The template **enables all optional features by default**. To disable a feature, either delete the method or change it to `return null`.
 
 ---
 
 ## Optional Features
 
-Each feature is a separate class. Enable a feature by returning an instance from the corresponding method in `Column.php`, or remove the method to disable it.
+Each feature is a separate class. All four are enabled by default — return `null` or remove the method to disable one.
+
+| Feature | File | Enabled by default | Built-in shortcut available |
+|---|---|---|---|
+| Display value | `Column.php` → `get_formatters()` | Required | `AC\Formatter\Meta` |
+| Inline/bulk editing | `Editing.php` → `get_editing()` | Yes | `ACP\Editing\Service\Post\Meta` |
+| Smart filtering | `Search.php` → `get_search()` | Yes | `ACP\Search\Comparison\Meta\Text` etc. |
+| Sorting | `Sorting.php` → `get_sorting()` | Yes | `ACP\Sorting\Model\Post\Meta` |
+| CSV export | `Export.php` → `get_export()` | Yes | Omit method to reuse display formatter |
 
 ### Inline & Bulk Editing — `Editing.php`
 
