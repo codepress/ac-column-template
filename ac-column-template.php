@@ -4,7 +4,7 @@
  * Plugin URI: https://admincolumns.com
  * Description: COLUMN_LABEL column for Admin Columns Pro
  * Version: 1.0
- * Requires PHP: 7.2
+ * Requires PHP: 7.4
  */
 
 const AC_CT_FILE = __FILE__;
