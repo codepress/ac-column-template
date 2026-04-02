@@ -21,9 +21,9 @@ A starter-kit plugin for creating custom column types for **Admin Columns Pro**.
 
 Two placeholders appear throughout the files — replace both everywhere before activating:
 
-| Placeholder | What it becomes | Example |
-|---|---|---|
-| `COLUMN_NAME` | Machine identifier — lowercase, hyphens OK | `my-score` |
+| Placeholder | What it becomes                                 | Example |
+|---|-------------------------------------------------|---|
+| `COLUMN_NAME` | Column identifier — lowercase, hyphens OK       | `my-score` |
 | `COLUMN_LABEL` | Human-readable label shown in the column picker | `My Score` |
 
 Run a find-and-replace across **all files in the folder**, not just `Column.php`. Both placeholders appear in the main plugin file, `Column.php`, and the plugin header comment.
