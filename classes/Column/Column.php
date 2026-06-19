@@ -7,6 +7,11 @@ namespace AcColumnTemplate\Column;
 use AC;
 use ACP;
 
+/**
+ * Custom column type. Extend the factory and override the methods you need.
+ *
+ * @link https://docs.admincolumns.com/article/122-class-columnfactory Class: ColumnFactory
+ */
 class Column extends ACP\Column\AdvancedColumnFactory
 {
 
