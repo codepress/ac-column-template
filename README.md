@@ -187,5 +187,6 @@ return new AC\FormatterCollection([
 ## Further Reading
 
 - [How to create a custom column](https://docs.admincolumns.com/article/21-how-to-create-my-own-column)
+- [Class: ColumnFactory](https://docs.admincolumns.com/article/122-class-columnfactory)
 - [Inline editing docs](https://docs.admincolumns.com/article/27-how-to-use-inline-editing)
 - [Bulk editing docs](https://docs.admincolumns.com/article/67-how-to-use-bulk-editing)
